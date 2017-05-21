@@ -22,9 +22,9 @@
         <td><%= book.author %></td>
         <td><%= book.date %></td>
         <td><%= book.stock %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Voir', book %></td>
+        <td><%= link_to 'Modifier', edit_book_path(book) %></td>
+        <td><%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Etes-vous sur de bien supprimer ce livre?' } %></td>
       </tr>
     <% end %>
   </tbody>
