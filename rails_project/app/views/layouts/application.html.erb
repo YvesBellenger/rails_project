@@ -36,10 +36,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
-                  <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
-                  <%= submit_tag "Search", :name => nil %>
-              <% end %>
+
             </li>
             <li><%=link_to "S'inscrire"%></li>
             <li><%=link_to "Se connecter"%></li>
