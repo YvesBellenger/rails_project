@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RailsProject</title>
+    <title>La bibliothèque</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -48,6 +48,15 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+
+    </div>
+      <footer class="footer">
+        <div class="container">
+          footer
+        </div>
+      </footer>
   </body>
+
 </html>
