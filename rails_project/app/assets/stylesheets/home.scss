@@ -1,0 +1,25 @@
+@media (min-width: 768px){
+  nav.navbar{
+    border-radius : 0px;
+  }
+}
+
+div.c-wrapper{
+  width: 40%; /* for example */
+  margin: auto;
+}
+
+.carousel-inner{
+  height:300px;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img{
+  width: 100%; /* use this, or not */
+  margin: auto;
+}
+
+.img-une{
+  width:130px;
+  height:200px;
+  border: solid 1px black;
+}
