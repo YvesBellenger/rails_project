@@ -43,6 +43,18 @@
             </li>
             <li><%=link_to "S'inscrire"%></li>
             <li><%=link_to "Se connecter"%></li>
+
+            <p>
+              <% if user_signed_in? %>
+              Connecté en tant que <%= current_user.email %>
+              <%= link_to 'Se déconnecter',
+                          destroy_user_session_path,
+                          method: :delete %>
+              <% else %>
+              <%= link_to 'Se connecter', new_user_session_path %>
+              <% end %>
+            </p>
+
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
