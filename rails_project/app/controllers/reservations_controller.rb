@@ -4,31 +4,45 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    @book = Book.find(params[:book_id])
+    @reservations = Reservation.includes(:user,:book)
   end
 
   # GET /reservations/1
   # GET /reservations/1.json
   def show
+    @book = Book.find(params[:book_id])
   end
 
   # GET /reservations/new
   def new
+    @book = Book.find(params[:book_id])
     @reservation = Reservation.new
   end
 
   # GET /reservations/1/edit
   def edit
+    @book = Book.find(params[:book_id])
   end
 
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
-    if @reservation.save
-      redirect_to @reservation, notice: 'Reservation was successfully created.'
+    @book = Book.find(params[:book_id])
+    if @book.stock <= 0
+      redirect_to book_reservations_path(@book, @reservation), notice: 'Nous n\'avons plus le livre en stock'
     else
-      render :new
+      @reservation = Reservation.new(reservation_params)
+      @reservation.user = current_user
+      @reservation.book = @book
+      @reservation.date_debut = DateTime.now
+      @book.stock = @book.stock-1
+      @book.save
+      if @reservation.save
+        redirect_to book_reservation_path(@book, @reservation), notice: 'Vous avez bien réservé le livre'
+      else
+        render :new
+      end
     end
   end
 
@@ -46,8 +60,21 @@ class ReservationsController < ApplicationController
   # DELETE /reservations/1
   # DELETE /reservations/1.json
   def destroy
+    @book = Book.find(params[:book_id])
     @reservation.destroy
-    redirect_to reservations_url, notice: 'Reservation was successfully destroyed.'
+    @book.stock = @book.stock+1
+    @book.save
+    redirect_to book_reservations_url, notice: 'Reservation was successfully destroyed.'
+  end
+
+  def livre_rendu
+    set_reservation
+    @book = Book.find(params[:book_id])
+    @book.stock = @book.stock+1
+    @book.save
+    @reservation.rendu = true
+    @reservation.save
+    redirect_to book_reservation_url, notice: 'Vous avez bien rendu le livre'
   end
 
   private
@@ -58,6 +85,8 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:livre, :user, :date_debut, :date_fin)
+      params.require(:reservation).permit(:date_fin)
     end
+
+
 end

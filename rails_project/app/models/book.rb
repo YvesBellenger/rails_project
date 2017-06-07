@@ -17,4 +17,6 @@ class Book < ApplicationRecord
                  attributes: :avatar,
                  less_than: 1.megabytes
 
+  validates :avatar, presence: true
+
 end

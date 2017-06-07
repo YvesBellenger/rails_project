@@ -32,5 +32,23 @@
   <%= @book.stock %>
 </p>
 
+<% if current_user  %>
+    <% reservation_livre = Reservation.where(["user_id = ?", current_user.id]).where(["book_id = ?", @book.id]).last %>
+    <% if !defined?(reservation_livre.id) %>
+        <%= link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(@book) %><br><br>
+    <% end %>
+    <% if defined?(reservation_livre.id)  %>
+        <% if reservation_livre.rendu %>
+            <%= link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(@book) %><br><br>
+        <% else %>
+            <%= link_to raw('<button>Rendre le livre</button>'), book_reservation_path(@book, reservation_livre), method: :livre_rendu %><br><br>
+        <% end %>
+    <% end %>
+
+
+    <% else %>
+    Vous devez être connecté si vous souhaitez réserver un livre <br><br>
+<% end %>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
