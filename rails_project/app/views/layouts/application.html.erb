@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>RailsProject</title>
+    <title>La bibliothèque</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -35,6 +35,12 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+                  <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+                  <%= submit_tag "Search", :name => nil %>
+              <% end %>
+            </li>
             <li><%=link_to "S'inscrire"%></li>
             <li><%=link_to "Se connecter"%></li>
 
@@ -54,6 +60,15 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+
+    </div>
+      <footer class="footer">
+        <div class="container">
+          footer
+        </div>
+      </footer>
   </body>
+
 </html>
