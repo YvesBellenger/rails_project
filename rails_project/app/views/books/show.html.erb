@@ -1,29 +1,54 @@
 <p id="notice"><%= notice %></p>
 
+
+<% if @book.avatar.exists? %>
+    <div style="text-align: center;">
+      <%= image_tag @book.avatar.url(:medium) %>
+    </div>
+<% end %>
+
 <p>
-  <strong>Title:</strong>
+  <strong>Titre :</strong>
   <%= @book.title %>
 </p>
 
 <p>
-  <strong>Text:</strong>
+  <strong>Description :</strong>
   <%= @book.text %>
 </p>
 
 <p>
-  <strong>Author:</strong>
+  <strong>Auteur :</strong>
   <%= @book.author %>
 </p>
 
 <p>
-  <strong>Date:</strong>
+  <strong>Date de publication:</strong>
   <%= @book.date %>
 </p>
 
 <p>
-  <strong>Stock:</strong>
+  <strong>Nombre de livres en stock:</strong>
   <%= @book.stock %>
 </p>
+
+<% if current_user  %>
+    <% reservation_livre = Reservation.where(["user_id = ?", current_user.id]).where(["book_id = ?", @book.id]).last %>
+    <% if !defined?(reservation_livre.id) %>
+        <%= link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(@book) %><br><br>
+    <% end %>
+    <% if defined?(reservation_livre.id)  %>
+        <% if reservation_livre.rendu %>
+            <%= link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(@book) %><br><br>
+        <% else %>
+            <%= link_to raw('<button>Rendre le livre</button>'), book_reservation_path(@book, reservation_livre), method: :livre_rendu %><br><br>
+        <% end %>
+    <% end %>
+
+
+    <% else %>
+    Vous devez être connecté si vous souhaitez réserver un livre <br><br>
+<% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

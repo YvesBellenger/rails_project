@@ -2,6 +2,7 @@
 
 <div class="container-fluid">
   <div class="row">
+    <h1>Catalogue</h1>
     <div class="col-md-4 col-md-offset-4">
       <form class="searchform group">
         <label for="search-box">
@@ -12,39 +13,42 @@
       </form>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-12" id="liste-books">
+      <% i = 0 %>
+      <% @books.order("title asc").each do |book| %>
+          <% if i<6 %>
+          <div class="book-catalogue col-lg-2">
+            <%=  link_to raw("<img src='#{book.avatar.url()}' class='img-une'>"), book %>
+            <%#= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } #%>
+            <h3><%= book.title %></h3>
+          </div>
+            <% i=i+1 %>
+          <% else %>
+              <div class="row">
+                <div class="book-catalogue col-lg-2">
+                  <%=  link_to raw("<img src='#{book.avatar.url()}' class='img-une'>"), book %>
+                  <%#= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } #%>
+                  <h3><%= book.title %></h3>
+                </div>
+              </div>
+              <% i=0 %>
+          <% end %>
+      <% end %>
+      <% if i<6 %>
+          <div class="book-catalogue col-lg-2">
+            <%=  link_to ("Ajouter un nouveau livre"), new_book_path %>
+          </div>
+      <% else %>
+          <div class="row">
+            <div class="book-catalogue col-lg-2">
+              <%=  link_to ("Ajouter un nouveau livre"), new_book_path %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 
-<h1>Catalogue</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Text</th>
-      <th>Author</th>
-      <th>Date</th>
-      <th>Stock</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.text %></td>
-        <td><%= book.author %></td>
-        <td><%= book.date %></td>
-        <td><%= book.stock %></td>
-        <td><%= link_to 'Voir', book %></td>
-        <td><%= link_to 'Modifier', edit_book_path(book) %></td>
-        <td><%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Etes-vous sur de bien supprimer ce livre?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Book', new_book_path %>

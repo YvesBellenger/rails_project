@@ -31,27 +31,23 @@
           <ul class="nav navbar-nav">
             <li><%=link_to "Accueil", root_path%></li>
             <li><%=link_to "Catalogue", books_path%></li>
-            <li><%=link_to "Administration"%></li>
+            <li><%=link_to "Administration", rails_admin.dashboard_path %></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
-                  <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
-                  <%= submit_tag "Search", :name => nil %>
-              <% end %>
+
             </li>
-            <li><%=link_to "S'inscrire"%></li>
-            <li><%=link_to "Se connecter"%></li>
 
             <p>
               <% if user_signed_in? %>
-              Connecté en tant que <%= current_user.email %>
-              <%= link_to 'Se déconnecter',
+                <li>Connecté en tant que <%= current_user.email %> </li>
+                <li><%= link_to 'Se déconnecter',
                           destroy_user_session_path,
-                          method: :delete %>
+                                method: :delete %></li>
               <% else %>
-              <%= link_to 'Se connecter', new_user_session_path %>
+                <li><%= link_to 'Se connecter', new_user_session_path %></li>
+                <li><%= link_to 'S\'inscrire', new_user_registration_path %></li>
               <% end %>
             </p>
 

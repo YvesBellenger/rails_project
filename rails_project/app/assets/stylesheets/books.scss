@@ -16,7 +16,6 @@ label, input {
 }
 label {
   margin: 0.125em 0.125em 0 0;
-  float: right;
 
 }
 input[type="search"] {
@@ -33,4 +32,13 @@ input[type="search"]:focus {
   color: #E18728;
   border-color: #E18728;
   outline: none;
+}
+
+.small-img{
+  width: 60px;
+  height: 100px;
+}
+
+#liste-books{
+  margin-top:15px;
 }

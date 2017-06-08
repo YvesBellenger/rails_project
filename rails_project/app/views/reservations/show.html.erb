@@ -2,12 +2,12 @@
 
 <p>
   <strong>Livre:</strong>
-  <%= @reservation.livre %>
+  <%= @reservation.book_id %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @reservation.user %>
+  <%= @reservation.user_id %>
 </p>
 
 <p>
@@ -20,5 +20,5 @@
   <%= @reservation.date_fin %>
 </p>
 
-<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+<%= link_to 'Edit', edit_book_reservation_path(@book, @reservation) %> |
+<%= link_to 'Back', book_reservations_path(@book) %>

@@ -1,10 +1,15 @@
 module BooksHelper
-  def book_a_la_une(title,text,author)
+  def book_a_la_une(book)
 
-    raw "<div class ='img-une'>
-         <h3> #{title} </h3>
-         <p> #{author} </p>
-         <p> #{text} </p>
+    if book.avatar.exists?
+      raw "<div class ='img-une'>
+          <a href='/books/#{book.id}'><img src='#{book.avatar.url()}' alt='#{book.title}'/></a>
          </div>"
+    else
+      raw "<div class ='img-une'>
+          <a href='/books/#{book.id}'><h3>#{book.title}</h3></a>
+         </div>"
+
+    end
   end
 end

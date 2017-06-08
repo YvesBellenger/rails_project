@@ -1,33 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Reservations</h1>
+<h1>Reservations <%= @book.title %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Livre</th>
       <th>User</th>
       <th>Date debut</th>
       <th>Date fin</th>
+      <th>Rendu ?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.livre %></td>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.date_debut %></td>
-        <td><%= reservation.date_fin %></td>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @reservations.each do |book_reservation| %>
+      <% if book_reservation.book == @book %>
+      <% statut_rendu = "Non" %>
+          <% if book_reservation.rendu %>
+            <% statut_rendu="Oui" %>
+          <% end %>
+        <tr>
+          <td><%= book_reservation.user.email %></td>
+          <td><%= book_reservation.date_debut %></td>
+          <td><%= book_reservation.date_fin %></td>
+          <td><%= statut_rendu %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+<%= link_to 'New Reservation', new_book_reservation_path(@book) %>
