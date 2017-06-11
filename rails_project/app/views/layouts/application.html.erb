@@ -36,24 +36,24 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
-                  <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
-                  <%= submit_tag "Search", :name => nil %>
+              <%#= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+                  <%#= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+                  <%#= submit_tag "Search", :name => nil %>
+              <%# end %>
+            </li>
+            <li>
+              <% if user_signed_in? %>
+                  Connecté en tant que <%= link_to current_user.email,
+                    edit_user_registration_path %>
+                  <%= link_to 'Se déconnecter',
+                              destroy_user_session_path,
+                              method: :delete %>
+              <% else %>
+
+                  <li><%=link_to "S'inscrire", new_user_session_path %></li>
+                  <li><%= link_to 'Se connecter', new_user_session_path %></li>
               <% end %>
             </li>
-            <li><%=link_to "S'inscrire"%></li>
-            <li><%=link_to "Se connecter"%></li>
-
-            <p>
-              <% if user_signed_in? %>
-              Connecté en tant que <%= current_user.email %>
-              <%= link_to 'Se déconnecter',
-                          destroy_user_session_path,
-                          method: :delete %>
-              <% else %>
-              <%= link_to 'Se connecter', new_user_session_path %>
-              <% end %>
-            </p>
 
           </ul>
         </div><!-- /.navbar-collapse -->
