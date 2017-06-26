@@ -1,6 +1,7 @@
-<h1>Editing Reservation</h1>
+<h1>Modifier réservation pour <%= @book.title  %> de <%= @book.author %></h1>
 
-<%= render 'form', reservation: @reservation, book: @book %>
+<img src="<%= @book.avatar.url() %>" class="img-une"> <br><br>
 
-<%= link_to 'Show', book_reservation_path(@book, @reservation) %> |
-<%= link_to 'Back', book_reservations_path(@book) %>
+<%= render 'form_edit', reservation: @reservation, book: @book %>
+
+<%= link_to 'Annuler', book_reservation_path(@book, @reservation) %>

@@ -1,24 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Livre:</strong>
-  <%= @reservation.book_id %>
-</p>
+<h2> Statut de la réservation </h2>
+<h3> <%= @book.title %></h3>
+
+  <%=  link_to raw("<img src='#{@book.avatar.url()}' class='img-une'>"), @book %>
 
 <p>
-  <strong>User:</strong>
-  <%= @reservation.user_id %>
-</p>
-
-<p>
-  <strong>Date debut:</strong>
+  <strong>Début de la réservation</strong>
   <%= @reservation.date_debut %>
 </p>
 
 <p>
-  <strong>Date fin:</strong>
+  <strong>Réservé jusqu'au</strong>
   <%= @reservation.date_fin %>
 </p>
 
-<%= link_to 'Edit', edit_book_reservation_path(@book, @reservation) %> |
-<%= link_to 'Back', book_reservations_path(@book) %>
+<%= link_to 'Modifier ma réservation', edit_book_reservation_path(@book, @reservation) %> |
+<%= link_to 'Retour à la fiche du livre', book_path(@book) %>
