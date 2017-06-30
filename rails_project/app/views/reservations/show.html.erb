@@ -15,5 +15,9 @@
   <%= @reservation.date_fin %>
 </p>
 
+<% if Date.today >= @reservation.date_fin %>
+    <h3> Vous devez rendre le livre au plus vite </h3>
+<% end %>
+
 <%= link_to 'Modifier ma réservation', edit_book_reservation_path(@book, @reservation) %> |
 <%= link_to 'Retour à la fiche du livre', book_path(@book) %>

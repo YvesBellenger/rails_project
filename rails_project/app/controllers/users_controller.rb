@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @reservations = Reservation.includes(:user,:book)
   end
 
   # GET /users/new
