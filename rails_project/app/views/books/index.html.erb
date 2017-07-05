@@ -13,8 +13,7 @@
       </form>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12" id="liste-books">
+  <div class="row" id="liste-books">
       <% i = 0 %>
       <% @books.order("title asc").each do |book| %>
           <% if i<6 %>
@@ -25,6 +24,7 @@
           </div>
             <% i=i+1 %>
           <% else %>
+            </div>
               <div class="row">
                 <div class="book-catalogue col-lg-2">
                   <%=  link_to raw("<img src='#{book.avatar.url()}' class='img-une'>"), book %>
@@ -36,17 +36,17 @@
           <% end %>
       <% end %>
       <% if i<6 %>
-          <div class="book-catalogue col-lg-2">
+          <div id="new-book" class="book-catalogue col-lg-2">
             <%=  link_to ("Ajouter un nouveau livre"), new_book_path %>
           </div>
       <% else %>
           <div class="row">
             <div class="book-catalogue col-lg-2">
-              <%=  link_to ("Ajouter un nouveau livre"), new_book_path %>
+              <%= link_to raw("<div id='new-book'></div>"), new_book_path %>
+              <h3><%=  link_to ("Ajouter un nouveau livre"), new_book_path %></h3>
             </div>
           </div>
       <% end %>
-    </div>
   </div>
 </div>
 
