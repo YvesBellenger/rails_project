@@ -1,0 +1,23 @@
+<form class="searchform group" method="get" >
+  <label for="search-box">
+    <span class="fa fa-2x fa-search"></span>
+  </label>
+
+  <input type="search" id="search-box" name="q" placeholder="Rechercher">
+</form>
+<br><br>
+
+<% if @items.present? %>
+    <div class="row">
+      <% @items["items"].each do |item| %>
+          <div class="book-catalogue col-lg-2 col-md-3 col-sm-4 col-xs-6" >
+            <% if item["volumeInfo"]["imageLinks"].present? %>
+                <%= link_to raw("<img src='#{item["volumeInfo"]["imageLinks"]["thumbnail"]}' class='img-une'>"), "/searchaddbook/bookinfos?q=#{item['id']}" %>
+            <% else %>
+                <%= link_to raw("<img src='#{image_url("not_available.jpg")}' class='img-une'>"), "/searchaddbook/bookinfos?q=#{item['id']}" %>
+            <% end %>
+            <h5 class="book-title"><%= item["volumeInfo"]["title"] %></h5>
+          </div>
+      <% end %>
+    </div>
+<% end %>

@@ -1,5 +1,9 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!,only:[:new,:create]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  require 'rest-client'
+  require 'json'
+  require 'uri'
 
   # GET /books
   # GET /books.json
@@ -19,6 +23,60 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+  end
+
+  # GET /book/searchadd
+  def searchadd
+    url    =request.fullpath
+    uri    = URI.parse(url)
+
+    if(uri.query.present?)
+      params = CGI::parse(uri.query)
+      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes?q='+params['q'][0]+'&maxResults=40&printType=books'
+      @items = JSON.parse(response.body.force_encoding('UTF-8'))
+    end
+  end
+
+  # GET /searchadd/bookinfo
+  def searchaddinfos
+
+    url    =request.fullpath
+    uri    = URI.parse(url)
+
+    if(uri.query.present?)
+      params = CGI::parse(uri.query)
+      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+params['q'][0]
+      @item = JSON.parse(response.body.force_encoding('UTF-8'))
+    end
+  end
+
+  # POST /books
+  # POST /books.json
+  def add_book_api
+    url    =request.fullpath
+    uri    = URI.parse(url)
+    if(uri.query.present?)
+      @book = Book.new
+      params = CGI::parse(uri.query)
+      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+params['id'][0]
+      @item = JSON.parse(response.body.force_encoding('UTF-8'))
+      @book.title = @item["volumeInfo"]["title"]
+      @book.text = @item["volumeInfo"]["description"]
+      @book.author = @item["volumeInfo"]["authors"][0]
+      @book.date = @item["volumeInfo"]["publishedDate"]
+      if(@item["volumeInfo"]["imageLinks"].present?)
+        @book.remote_url=@item["volumeInfo"]["imageLinks"]["thumbnail"]
+      else
+        @book.remote_url= "https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg"
+      end
+      @book.stock = 0
+      @book.save
+      if @book.save
+        redirect_to edit_book_path(@book), notice: 'Book was successfully created.'
+      else
+        render :new
+      end
+    end
   end
 
   # POST /books
