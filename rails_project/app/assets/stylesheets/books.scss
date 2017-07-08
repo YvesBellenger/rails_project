@@ -47,4 +47,17 @@ input[type="search"]:focus {
   width: 200px;
   height: 300px;
   border: solid 1px black;
+  margin: auto;
+}
+
+.book-title{
+  position: absolute;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px
+}
+
+.book-catalogue{
+  margin-bottom: 70px;
+  text-align: center
 }

@@ -15,19 +15,19 @@ gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
-gem 'bootstrap-sass'
-gem 'bootstrap-glyphicons'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootstrap-glyphicons', '~> 0.0.1'
 
 
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '~> 6.7.7.1'
 
-gem 'simple_form'
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
-gem'devise'
-gem 'devise-i18n'
-gem 'paperclip'
-
+gem 'simple_form', '~> 3.4.0'
+gem 'will_paginate', '~> 3.1.5'
+gem 'will_paginate-bootstrap', '~> 1.0.1'
+gem 'devise', '~> 4.3.0'
+gem 'devise-i18n', '~> 1.1.2'
+gem 'paperclip', '~> 5.1.0'
+gem 'rest-client', '~> 1.8'
 
 gem 'rails_admin', '~> 1.1.1'
 

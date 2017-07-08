@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+
+<% if @item["volumeInfo"]["imageLinks"].present? %>
+    <div class="book-catalogue">
+      <img src='<%= @item["volumeInfo"]["imageLinks"]["thumbnail"] %>' class='img-une'>
+    </div>
+<% else %>
+    <div class="book-catalogue">
+      <img src='<%= image_url("not_available.jpg") %>' class='img-une'>
+    </div>
+<% end %>
+
+
+<p>
+  <strong>Titre :</strong>
+  <%= @item["volumeInfo"]["title"] %>
+</p>
+
+<p>
+  <strong>Description :</strong>
+  <%= raw @item["volumeInfo"]["description"] %>
+</p>
+
+<p>
+  <strong>Auteur :</strong>
+  <%= @item["volumeInfo"]["authors"][0] %>
+</p>
+
+<p>
+  <strong>Date de publication:</strong>
+  <%= @item["volumeInfo"]["publishedDate"] %>
+</p>
+
+<%= link_to raw('<button>Ajouter le livre à la Base de données</button>'), new_book_path(:id => @item["id"]), method: :add_book_api %><br><br>

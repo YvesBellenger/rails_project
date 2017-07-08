@@ -2,7 +2,7 @@
 
 
 <% if @book.avatar.exists? %>
-    <div style="text-align: center;">
+    <div class="book-catalogue">
       <%= image_tag @book.avatar.url(:medium) %>
     </div>
 <% end %>

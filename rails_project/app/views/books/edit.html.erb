@@ -1,3 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<% if @book.avatar.exists? %>
+    <div class="book-catalogue">
+      <%= image_tag @book.avatar.url(:medium) %>
+    </div>
+<% end %>
+
 <h1>Modifier</h1>
 
 <%= render 'form', book: @book %>
