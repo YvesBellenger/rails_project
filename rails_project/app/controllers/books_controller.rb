@@ -1,5 +1,9 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!,only:[:new,:create]
+
+  before_filter :authenticate_user!,only:[:new,:edit,:create,:searchaddinfos,:searchadd,:add_book_api,:destroy,:update] do
+    redirect_to new_user_session_path unless current_user && current_user.admin?
+  end
+
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   require 'rest-client'
   require 'json'
@@ -8,6 +12,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    :authenticate_user!
     @books = Book.all
   end
 

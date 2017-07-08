@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_filter :authenticate_user!,only:[:new,:edit,:index]
   before_action :set_book
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
