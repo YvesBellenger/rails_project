@@ -106,7 +106,6 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     redirect_to books_url, notice: 'Le livre a bien été supprimé'
-'
   end
 
   private
