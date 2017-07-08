@@ -72,7 +72,7 @@ class BooksController < ApplicationController
       @book.stock = 0
       @book.save
       if @book.save
-        redirect_to edit_book_path(@book), notice: 'Book was successfully created.'
+        redirect_to edit_book_path(@book), notice: 'Le livre a bien été ajouté. Modifiez si nécessaires les derniers détails.'
       else
         render :new
       end
@@ -84,7 +84,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to @book, notice: 'Book was successfully created.'
+      redirect_to @book, notice: 'Le livre a bien été crée'
     else
       render :new
     end
@@ -95,7 +95,7 @@ class BooksController < ApplicationController
   def update
     set_book
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
+      redirect_to @book, notice: 'Le livre a bien été mis à jour'
     else
       render :edit
     end
@@ -105,7 +105,8 @@ class BooksController < ApplicationController
   # DELETE /books/1.json
   def destroy
     @book.destroy
-    redirect_to books_url, notice: 'Book was successfully destroyed.'
+    redirect_to books_url, notice: 'Le livre a bien été supprimé'
+'
   end
 
   private
