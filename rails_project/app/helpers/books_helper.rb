@@ -13,7 +13,22 @@ module BooksHelper
     end
   end
 
-  def create_api_book_helper
+  def total_et_pretes(book)
+    if(book.stock.present?)
+      emprunt = Reservation.where(:book_id => book.id, :rendu => false).count(:all)
+      if(emprunt > 1)
+        raw "/ #{book.stock} (#{emprunt} livres sont actuellement en cours d'emprunt.)"
+      else
+        raw "/ #{book.stock} (#{emprunt} livre est actuellement en cours d'emprunt.)"
+      end
+    end
+  end
 
+  def afficher_date(date)
+    begin
+      I18n.localize date.to_date, format: :long
+    rescue
+      date
+    end
   end
 end

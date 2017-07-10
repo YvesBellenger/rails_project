@@ -24,12 +24,12 @@
 
 <p>
   <strong>Date de publication:</strong>
-  <%= @book.date %>
+  <%= afficher_date(@book.date) %>
 </p>
 
 <p>
   <strong>Nombre de livres en stock:</strong>
-  <%= @book.stock %>
+  <%= stock_book(@book) %><% if can? :manage, :all and @book.stock.present? %> <%= total_et_pretes(@book) %> <% end %>
 </p>
 
 <% if current_user  %>

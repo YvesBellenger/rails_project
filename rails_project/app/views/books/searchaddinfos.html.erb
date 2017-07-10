@@ -14,22 +14,33 @@
 
 <p>
   <strong>Titre :</strong>
-  <%= @item["volumeInfo"]["title"] %>
+  <% if @item["volumeInfo"]["description"].present? %>
+    <%= @item["volumeInfo"]["title"] %>
+  <% end %>
 </p>
+
+
 
 <p>
   <strong>Description :</strong>
-  <%= raw @item["volumeInfo"]["description"] %>
+  <% if @item["volumeInfo"]["description"].present? %>
+    <%= raw @item["volumeInfo"]["description"] %>
+  <% end %>
 </p>
+
 
 <p>
   <strong>Auteur :</strong>
-  <%= @item["volumeInfo"]["authors"][0] %>
+  <% if @item["volumeInfo"]["authors"].present? %>
+    <%= @item["volumeInfo"]["authors"][0] %>
+  <% end %>
 </p>
 
 <p>
   <strong>Date de publication:</strong>
-  <%= @item["volumeInfo"]["publishedDate"] %>
+  <% if  @item["volumeInfo"]["publishedDate"].present? %>
+    <%= afficher_date(@item["volumeInfo"]["publishedDate"]) %>
+  <% end %>
 </p>
 
-<%= link_to raw('<button>Ajouter le livre à la Base de données</button>'), new_book_path(:id => @item["id"]), method: :add_book_api %><br><br>
+<%= link_to raw('<button>Ajouter le livre à la Base de données</button>'), new_book_path(:q => @item["id"]), method: :add_book_api %><br><br>

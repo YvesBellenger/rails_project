@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -12,6 +13,16 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @reservations = Reservation.includes(:user,:book)
+  end
+
+  # GET /profil
+  def profil
+    if(current_user.present?)
+      @reservations = Reservation.includes(:user,:book)
+      @user = current_user
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /users/new
