@@ -31,8 +31,13 @@
           <ul class="nav navbar-nav">
             <li><%=link_to "Accueil", root_path%></li>
             <li><%=link_to "Catalogue", books_path%></li>
-            <li><%=link_to "Ajout livre", search_path_url %></li>
-            <li><%=link_to "Administration", rails_admin.dashboard_path %></li>
+            <% if current_user.present? %>
+              <li><%=link_to "Mon profil", profil_path_url%></li>
+            <% end %>
+            <%if can? :manage, :all%>
+              <li><%=link_to "Ajout livre", search_path_url %></li>
+              <li><%=link_to "Administration", rails_admin.dashboard_path %></li>
+            <% end %>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -42,7 +47,7 @@
 
             <p>
               <% if user_signed_in? %>
-                <li>Connecté en tant que <%= link_to current_user.email %> </li>
+                <li>Connecté en tant que <%= link_to raw("#{current_user.prenom}  #{current_user.nom}"), current_user %> </li>
                 <li><%= link_to 'Se déconnecter',
                           destroy_user_session_path,
                                 method: :delete %></li>

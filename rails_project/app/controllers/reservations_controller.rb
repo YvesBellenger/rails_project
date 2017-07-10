@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
-  before_filter :authenticate_user!,only:[:new,:edit,:index]
+  load_and_authorize_resource
+
   before_action :set_book
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
@@ -28,7 +29,7 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    if @book.stock <= 0
+    if stock_book(@book) <= 0
       redirect_to book_reservations_path(@book, @reservation), notice: 'Nous n\'avons plus le livre en stock'
     else
       @reservation = Reservation.new(reservation_params)
@@ -36,7 +37,6 @@ class ReservationsController < ApplicationController
       @reservation.book = @book
       @reservation.date_debut = DateTime.now
       @reservation.rendu = false
-      @book.stock = @book.stock-1
       @book.save
       if @reservation.save
         redirect_to book_reservation_path(@book, @reservation), notice: 'Vous avez bien réservé le livre'
@@ -61,15 +61,11 @@ class ReservationsController < ApplicationController
   # DELETE /reservations/1.json
   def destroy
     @reservation.destroy
-    @book.stock = @book.stock+1
-    @book.save
     redirect_to book_reservations_url, notice: 'Reservation was successfully destroyed.'
   end
 
   def livre_rendu
     set_reservation
-    @book.stock = @book.stock+1
-    @book.save
     @reservation.rendu = true
     @reservation.save
     redirect_to book_reservation_url, notice: 'Vous avez bien rendu le livre'

@@ -1,15 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  helper_method :stock_book, :nombre_prete
 
-  protected
-  def authenticate_admin!
-    if user_signed_in?
-      super
+  rescue_from CanCan::AccessDenied do |exception|
+    if request.env['HTTP_REFERER'].present?
+      redirect_to '/',notice: "Vous n'avez pas l'autorisation d'accéder à cette page"
     else
-      redirect_to login_path, :notice => 'if you want to add a notice'
-      ## if you want render 404 page
-      ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      redirect_to '/',notice: "Vous n'avez pas l'autorisation d'accéder à cette page"
     end
   end
+
+  def stock_book(book)
+    if(book.stock.present?)
+      tmp = Reservation.where(:book_id => book.id, :rendu => false).count(:all)
+      @stock_book = book.stock - tmp
+    else
+      "Stock non défini"
+    end
+  end
+
+
 
 end

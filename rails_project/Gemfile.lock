@@ -51,6 +51,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    cancancan (2.0.0)
     climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -82,7 +83,7 @@ GEM
       tilt
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (0.8.5)
+    i18n (0.8.6)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -146,6 +147,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (5.0.4)
+      i18n (~> 0.7)
+      railties (~> 5.0)
     rails_admin (1.1.1)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -177,6 +181,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rolify (5.1.0)
     sass (3.4.25)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -235,6 +240,7 @@ DEPENDENCIES
   bootstrap-glyphicons (~> 0.0.1)
   bootstrap-sass (~> 3.3.7)
   byebug
+  cancancan
   coffee-rails (~> 4.2)
   devise (~> 4.3.0)
   devise-i18n (~> 1.1.2)
@@ -244,8 +250,10 @@ DEPENDENCIES
   paperclip (~> 5.1.0)
   puma (~> 3.0)
   rails (~> 5.0.2)
+  rails-i18n (~> 5.0.0)
   rails_admin (~> 1.1.1)
   rest-client (~> 2.0.2)
+  rolify
   sass-rails (~> 5.0)
   simple_form (~> 3.4.0)
   spring

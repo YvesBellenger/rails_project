@@ -10,29 +10,23 @@
   <%= @user.prenom %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
 
 <p>
   <strong>Mail:</strong>
-  <%= @user.mail %>
+  <%= @user.email %>
 </p>
 
 <p>
-  <strong>Date inscription:</strong>
-  <%= @user.date_inscription %>
+  <strong>Date d'inscription:</strong>
+  <%= l @user.created_at.to_date, :format => :long, locale: :fr %>
 </p>
 
 <div class="row">
-  <% @reservations.each do |book_reservation| %>
-    <% if !book_reservation.rendu %>
-          <div class="book-catalogue col-lg-2">
-            <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation.book %>
-            <h3><%= book_reservation.book.title %></h3>
-          </div>
-    <% end %>
+  <% @reservations.where(:user_id => @user.id, :rendu => false).each do |book_reservation| %>
+    <div class="book-catalogue col-lg-2">
+      <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation.book %>
+    <h3><%= book_reservation.book.title %></h3>
+    </div>
   <% end %>
 </div>
 

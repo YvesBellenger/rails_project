@@ -7,12 +7,12 @@
 
 <p>
   <strong>Début de la réservation</strong>
-  <%= @reservation.date_debut %>
+  <%= l @reservation.date_debut, :format => :long %>
 </p>
 
 <p>
   <strong>Réservé jusqu'au</strong>
-  <%= @reservation.date_fin %>
+  <%= l @reservation.date_fin, :format => :long %>
 </p>
 
 <% if Date.today >= @reservation.date_fin %>
