@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710190450) do
+ActiveRecord::Schema.define(version: 20170710212217) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20170710190450) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.date     "date_debut"
-    t.date     "date_fin"
+    t.datetime "date_debut"
+    t.datetime "date_fin"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "rendu",      default: false

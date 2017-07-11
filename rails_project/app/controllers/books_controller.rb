@@ -9,8 +9,18 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    :authenticate_user!
-    @books = Book.all
+    url    =request.fullpath
+    uri    = URI.parse(url)
+    @req=false
+
+    if(uri.query.present?)
+      params = CGI::parse(uri.query)
+      @books = Book.where("title LIKE (?) OR author LIKE (?)", "%#{params['q'][0]}%", "%#{params['q'][0]}%")
+      @req=true
+    else
+      @books = Book.all
+    end
+
   end
 
   # GET /books/1
@@ -62,8 +72,8 @@ class BooksController < ApplicationController
       params = CGI::parse(uri.query)
       response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+params['q'][0]
       @item = JSON.parse(response.body.force_encoding('UTF-8'))
-      @bookTest = Book.where(:google_book_id => @item["id"]).first
-      if(!@bookTest.present?)
+      @book_test = Book.where(:google_book_id => @item["id"]).first
+      if(!@book_test.present?)
         Book.setup_book(@book,@item)
         if @book.save
           redirect_to edit_book_path(@book), notice: 'Le livre a bien été ajouté. Modifiez si nécessaires les derniers détails.'

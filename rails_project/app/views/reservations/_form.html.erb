@@ -10,12 +10,9 @@
       </ul>
     </div>
   <% end %>
-
-
-
   <div class="field">
     <%= f.label :date_fin %>
-    <%= f.date_select :date_fin %>
+    <%= f.text_field :date_fin, :class => 'datepicker', :required => :true, :value => I18n.localize(Date.current.to_date, :format => :long) %>
   </div>
 
   <div class="actions">
@@ -23,3 +20,11 @@
   </div>
 <% end %>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: "dd MM yyyy",
+            language: "fr"
+        });
+    });
+</script>

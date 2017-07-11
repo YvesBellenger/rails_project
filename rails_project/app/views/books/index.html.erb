@@ -4,15 +4,18 @@
   <div class="row">
     <h1>Catalogue</h1>
     <div class="col-md-4 col-md-offset-4">
-      <form class="searchform group" action="#?q=">
+      <form method="get" class="searchform group">
         <label for="search-box">
           <span class="fa fa-2x fa-search"></span>
         </label>
 
-        <input type="search" id="search-box" placeholder="Rechercher">
+        <input type="search" id="search-box" name="q" placeholder="Rechercher">
       </form>
     </div>
   </div>
+  <% if @req %>
+    <%= link_to raw("<button> Voir tous les livres</button>") %>
+  <% end %>
   <div class="row" id="liste-books">
     <% @books.order('date desc').each do |book| %>
         <div class="book-catalogue col-lg-2 ">
@@ -20,10 +23,7 @@
           <h5 class="book-title"><%= book.title %></h5>
         </div>
     <% end %>
-    <div class="book-catalogue col-lg-2">
-      <div id="new-book"></div>
-      <h5 class="book-title"><%= link_to ("Ajouter un nouveau livre"), new_book_path %></h5>
-    </div>
+
 
   </div>
 </div>

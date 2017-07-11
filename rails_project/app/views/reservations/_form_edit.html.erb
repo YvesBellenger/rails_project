@@ -14,16 +14,24 @@
 
 
     <div class="field">
-      <%= f.label :date_fin %><br/>
-      <%= f.date_select :date_fin %>
-    </div>
-
-    <div class=field">
-      <%= f.label :rendu %>
-      <%= f.check_box :rendu %>
+      <%= f.label :date_fin %>
+      <% if @reservation.date_fin.present? %>
+          <%= f.text_field :date_fin, :class => 'datepicker', :value => I18n.localize(@reservation.date_fin.to_date, :format => :long) %>
+      <% else %>
+          <%= f.text_field :date_fin, :class => 'datepicker' %>
+      <% end %>
     </div>
 
     <div class="actions">
       <%= f.submit "Sauvegarder" %>
     </div>
 <% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: "dd MM yyyy",
+            language: "fr"
+        });
+    });
+</script>

@@ -1,7 +1,9 @@
+<p id="notice"><%= notice %></p>
+
 <h1>Nouvelle réservation pour <%= @book.title  %> de <%= @book.author %></h1>
 
 <img src="<%= @book.avatar.url() %>" class="img-une"> <br><br>
 
 <%= render 'form', reservation: @reservation, book: @book %>
 
-<%= link_to 'Back', book_reservations_path(book_id: @book.id) %>
+<%= link_to 'Retour', @book %>

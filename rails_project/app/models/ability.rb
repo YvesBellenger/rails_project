@@ -7,13 +7,12 @@ class Ability
         can :manage, :all
 
       else
-        can :read, user
-        can :edit, user
-        can :update, user
+        can [:read, :edit, :update], user
         can :profil, User
         can :read, Book
-        can :manage, Reservation
-        cannot :index, Reservation
+        can :read, Reservation, user_id: user.id
+        can :manage, Reservation, rendu: false, user_id: user.id
+        cannot [:index, :tous_les_livres], Reservation
       end
 
     # Define abilities for the passed in user here. For example:

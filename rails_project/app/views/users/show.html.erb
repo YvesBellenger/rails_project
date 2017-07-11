@@ -21,6 +21,7 @@
   <%= l @user.created_at.to_date, :format => :long, locale: :fr %>
 </p>
 
+<h2> Livres de l'utilisateurs en cours de réservation </h2>
 <div class="row">
   <% @reservations.where(:user_id => @user.id, :rendu => false).each do |book_reservation| %>
     <div class="book-catalogue col-lg-2">
