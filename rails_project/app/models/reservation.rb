@@ -3,4 +3,12 @@ class Reservation < ApplicationRecord
 
   belongs_to :user
   belongs_to :book
+
+  def self.setup_reservation(book,reservation,user)
+    reservation.user = user
+    reservation.book = book
+    reservation.date_debut = DateTime.now
+    reservation.rendu = false
+    reservation.save
+  end
 end

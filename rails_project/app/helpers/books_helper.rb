@@ -24,6 +24,14 @@ module BooksHelper
     end
   end
 
+  def en_stock(book)
+    if stock_book(book) > 0
+      link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(book)
+    else
+      raw '<p>Nous n\'avons plus le livre en stock</p>'
+    end
+  end
+
   def afficher_date(date)
     begin
       I18n.localize date.to_date, format: :long
@@ -31,4 +39,6 @@ module BooksHelper
       date
     end
   end
+
+
 end

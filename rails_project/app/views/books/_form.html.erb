@@ -12,23 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %>
+    <%= f.label 'Titre' %>
     <%= f.text_field :title %>
   </div>
 
   <div class="field">
-    <%= f.label :text %>
+    <%= f.label 'Résumé' %>
     <%= f.text_area :text %>
   </div>
 
   <div class="field">
-    <%= f.label :author %>
+    <%= f.label 'Auteur' %>
     <%= f.text_field :author %>
   </div>
 
   <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
+    <%= f.label 'Date de publication' %>
+    <% if @book.date.present? %>
+      <%= f.text_field :date, :class => 'datepicker', :value => I18n.localize(@book.date.to_date, :format => :default) %>
+    <% else %>
+      <%= f.text_field :date, :class => 'datepicker' %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -45,3 +49,12 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: "dd MM yyyy",
+            language: "fr"
+        });
+    });
+</script>

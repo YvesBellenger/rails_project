@@ -1,15 +1,21 @@
 class ReservationsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_book
+  before_action :set_book, except: :reservations_all
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
 
 
-  # GET /reservations
+  # GET /reservations/
   # GET /reservations.json
   def index
-    @reservations = Reservation.includes(:user,:book)
+    @reservations = Reservation.where(:book => @book)
+  end
+
+  # GET /reservations
+  # GET /reservations.json
+  def reservations_all
+    @reservations = Reservation.all
   end
 
   # GET /reservations/1
@@ -24,6 +30,9 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1/edit
   def edit
+    if @reservation.rendu
+      redirect_to :back, notice: 'Vous ne pouvez pas changer la réservation d\'un livre déjà rendu'
+    end
   end
 
   # POST /reservations
@@ -32,16 +41,21 @@ class ReservationsController < ApplicationController
     if stock_book(@book) <= 0
       redirect_to book_reservations_path(@book, @reservation), notice: 'Nous n\'avons plus le livre en stock'
     else
-      @reservation = Reservation.new(reservation_params)
-      @reservation.user = current_user
-      @reservation.book = @book
-      @reservation.date_debut = DateTime.now
-      @reservation.rendu = false
-      @book.save
-      if @reservation.save
-        redirect_to book_reservation_path(@book, @reservation), notice: 'Vous avez bien réservé le livre'
+      @reservation_test = Reservation.where(:user_id => current_user.id, :book_id => @book.id, :rendu => false).first
+      if !@reservation_test.present?
+        @reservation = Reservation.new(reservation_params)
+        if (@reservation.date_fin > Date.current )
+          Reservation.setup_reservation(@book,@reservation,current_user)
+          if @reservation.save
+            redirect_to book_reservation_path(@book, @reservation), notice: 'Vous avez bien réservé le livre'
+          else
+            render :new
+          end
+        else
+          redirect_to new_book_reservation_path(@book), notice: 'Vous ne pouvez pas réserver ce livre pour moins d\'une journée'
+        end
       else
-        render :new
+        redirect_to book_path(@book), notice: 'Vous avez déjà réservé ce livre'
       end
     end
   end

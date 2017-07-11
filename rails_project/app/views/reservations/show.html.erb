@@ -7,17 +7,27 @@
 
 <p>
   <strong>Début de la réservation</strong>
-  <%= l @reservation.date_debut, :format => :long %>
+  <%= l @reservation.date_debut.to_date, :format => :long %>
 </p>
 
 <p>
   <strong>Réservé jusqu'au</strong>
-  <%= l @reservation.date_fin, :format => :long %>
+  <%= l @reservation.date_fin.to_date, :format => :long %>
 </p>
 
+<b>Réservé par : </b><%= @reservation.user.prenom %> <%= @reservation.user.nom %> <br><br>
+<b>Courriel de contact : </b> <%= @reservation.user.email %> <br><br>
+
+<% if can? :manange, :all %>
+    <b>Statut rendu : </b> <% if @reservation.rendu %> Rendu <% else %> Non rendu <% end %> <br><br>
+<% end %>
 <% if Date.today >= @reservation.date_fin %>
-    <h3> Vous devez rendre le livre au plus vite </h3>
+    <h3> Livre à rendre au plus vite </h3>
 <% end %>
 
-<%= link_to 'Modifier ma réservation', edit_book_reservation_path(@book, @reservation) %> |
-<%= link_to 'Retour à la fiche du livre', book_path(@book) %>
+<% if @reservation.user = current_user and !@reservation.rendu %>
+  <%= link_to raw('<button>Rendre le livre</button>'), book_reservation_path(@book, @reservation), method: :livre_rendu %><br><br>
+<% end %>
+
+<%= link_to 'Modifier la réservation', edit_book_reservation_path(@book, @reservation) %> <br>
+<%= link_to 'Fiche du livre', book_path(@book) %>

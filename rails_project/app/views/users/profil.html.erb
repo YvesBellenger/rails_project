@@ -1,37 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Prenom:</strong>
+  <%= @user.prenom %>
+</p>
+
+<p>
   <strong>Nom:</strong>
   <%= @user.nom %>
 </p>
 
-<p>
-  <strong>Prenom:</strong>
-  <%= @user.prenom %>
-</p>
+
 
 
 <p>
   <strong>Mail:</strong>
   <%= @user.email %>
 </p>
-
-<p>
-  <strong>Date d'inscription:</strong>
-  <%= l @user.created_at.to_date, :format => :long, locale: :fr %>
-</p>
+<div class="row">
+  <%= link_to raw('<button>Editer mes informations</button>'), edit_user_path(@user) %><br><br>
+  <%= link_to raw('<button>Changer mot de passe</button>'), edit_user_registration_path %>
+</div>
+<h2>Mes livres en cours de réservation</h2>
 
 <div class="row">
-  <% @reservations.where(:user_id => @user.id, :rendu => false).each do |book_reservation| %>
+  <% @reservations.where(:user_id => @user.id, :rendu => false).order('date_fin asc').each do |book_reservation| %>
     <div class="book-catalogue col-lg-2">
-      <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation.book %>
-      <h3><%= book_reservation.book.title %></h3>
+      <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation_path(book_reservation.book, book_reservation) %>
+      <h5 class="book-title"><%= book_reservation.book.title %></h5>
+      <% if Date.today >= book_reservation.date_fin%>
+          <br><br><h4>A rendre</h4>
+      <% end %>
     </div>
   <% end %>
 </div>
 
-<div class="row">
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %> |
-  <%= link_to 'Changer mot de passe', edit_user_registration_path %>
-</div>
