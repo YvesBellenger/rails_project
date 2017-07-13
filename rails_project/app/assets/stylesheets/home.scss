@@ -45,7 +45,7 @@ div.c-wrapper{
 
 .main-title{
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 10%;
   background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
@@ -77,4 +77,8 @@ div.c-wrapper{
 
 .books-list div{
   margin: auto;
+}
+
+.alert.notice{
+  margin-bottom: 0px;
 }

@@ -14,16 +14,16 @@
         <th>Compte</th>
       </tr>
 
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.prenom %></td>
-        <td><%= user.nom %></td>
-        <td><%= user.email %></td>
-        <td><%= l user.created_at.to_date, :format => :long %></td>
-        <td><%= Reservation.where(:user_id => user.id, :rendu => false).count %></td>
-        <td><%= link_to 'Voir', user_path(user)%></td>
-      </tr>
-    <% end %>
-</table>
-
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.prenom %></td>
+          <td><%= user.nom %></td>
+          <td><%= user.email %></td>
+          <td><%= l user.created_at.to_date, :format => :long %></td>
+          <td><%= Reservation.where(:user_id => user.id, :rendu => false).count %></td>
+          <td><%= link_to 'Voir', user_path(user)%></td>
+        </tr>
+      <% end %>
+    </table>
+  </div></div>
 <br>
