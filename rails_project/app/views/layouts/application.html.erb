@@ -42,13 +42,9 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li>
 
-            </li>
-
-            <p>
               <% if user_signed_in? %>
-                <li>Connecté en tant que <%= link_to raw("#{current_user.prenom}  #{current_user.nom}"), current_user %> </li>
+                <li><p>Connecté en tant que <%= link_to raw("#{current_user.prenom}  #{current_user.nom}"), current_user %> </p></li>
                 <li><%= link_to 'Se déconnecter',
                           destroy_user_session_path,
                                 method: :delete %></li>
@@ -56,7 +52,7 @@
                 <li><%= link_to 'Se connecter', new_user_session_path %></li>
                 <li><%= link_to 'S\'inscrire', new_user_registration_path %></li>
               <% end %>
-            </p>
+
 
           </ul>
         </div><!-- /.navbar-collapse -->

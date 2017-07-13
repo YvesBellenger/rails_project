@@ -55,6 +55,26 @@ div.c-wrapper{
   display: flex;
 }
 
+@media screen and (max-width: 1024px){
+  .main-title{
+    display: none;
+  }
+}
+
 .main-title h1{
+  margin: auto;
+}
+
+#la-une h2{
+  margin-left: 2%;
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
+
+.books-list{
+  display: flex;
+}
+
+.books-list div{
   margin: auto;
 }

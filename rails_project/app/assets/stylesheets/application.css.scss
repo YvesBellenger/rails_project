@@ -63,3 +63,25 @@ code {
 .nav li  {
   color:white;
 }
+
+/****** NAVBAR *******/
+
+.nav.navbar-nav.navbar-right {
+  display: flex;
+}
+
+.nav.navbar-nav.navbar-right li:first-child{
+  margin: auto;
+  margin-right: 10px;
+}
+
+.nav.navbar-nav.navbar-right li:first-child p{
+  margin: 0 0 0px !important;
+}
+
+.nav.navbar-nav.navbar-right li:first-child p a{
+  color: #337ab7;
+  margin-left: 5px;
+}
+
+

@@ -48,11 +48,13 @@
 <div class="container-fluid">
   <div class="row col-lg-12" id="la-une">
     <h2> Derniers livres ajoutés </h2>
-    <% @books.order("created_at desc").first(6).each do |book| %>
-      <div class="col-lg-2">
-        <%= book_a_la_une(book) %>
-      </div>
-    <% end %>
+    <div class="books-list">
+      <% @books.order("created_at desc").first(6).each do |book| %>
+          <div class="col-lg-2">
+            <%= book_a_la_une(book) %>
+          </div>
+      <% end %>
+    </div>
 
   </div>
 </div>
