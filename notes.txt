@@ -3,7 +3,7 @@
 - système de note ?
 - profil : nom et prénom ne s’affichent pas (je me suis peut être inscrit sans les renseigner aussi, à checker)
 - http://localhost:3000/users/sign_in : alert si on se plante
-
+- ajouter custom font 
 
 page à intégrer :
 

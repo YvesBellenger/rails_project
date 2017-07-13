@@ -87,3 +87,14 @@ code {
 .navbar.navbar-inverse{
   margin-bottom: 0px;
 }
+
+.navbar-brand.logo{
+  padding: 0;
+  padding-left: 15px;
+}
+
+.navbar-brand.logo img{
+  height: 100%;
+  width: auto;
+  padding: 10px;
+}
