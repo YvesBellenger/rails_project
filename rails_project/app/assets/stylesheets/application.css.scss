@@ -98,3 +98,19 @@ code {
   width: auto;
   padding: 10px;
 }
+
+/******** FONTS ********/
+
+@font-face {
+  font-family: "Drugs";
+  src: url(../font/Drugs.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "CaviarDreams";
+  src: url(../font/CaviarDreams.ttf) format("truetype");
+}
+
+h1, h2{
+  font-family: "Drugs";
+}
