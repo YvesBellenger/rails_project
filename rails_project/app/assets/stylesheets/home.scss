@@ -53,6 +53,7 @@ div.c-wrapper{
   height: 20%;
   padding: 20px;
   display: flex;
+  border-left: solid 10px black;
 }
 
 @media screen and (max-width: 1024px){
@@ -63,9 +64,10 @@ div.c-wrapper{
 
 .main-title h1{
   margin: auto;
+
 }
 
-#la-une h2{
+#la-une h1{
   margin-left: 2%;
   margin-bottom: 30px;
   margin-top: 0px;

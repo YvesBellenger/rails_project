@@ -64,6 +64,17 @@ code {
   color:white;
 }
 
+h1{
+  text-transform: uppercase;
+  margin: 20px;
+}
+
+/***** NEED A PARENT WITH DISPLAY FLEX *****/
+
+.vertical-align{
+  margin: auto;
+}
+
 /****** NAVBAR *******/
 
 .nav.navbar-nav.navbar-right {
@@ -113,4 +124,12 @@ code {
 
 h1, h2{
   font-family: "Drugs";
+}
+
+/******** FOOTER ********/
+
+
+.footer{
+  background-color: #101010;
+  color : #ffffff;
 }
