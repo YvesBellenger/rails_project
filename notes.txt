@@ -1,6 +1,8 @@
 - pagination pour http://localhost:3000/books et http://localhost:3000/searchaddbook
 - http://localhost:3000/searchaddbook : affichage d'une sélection de livre ?
 - système de note ?
+- profil : nom et prénom ne s’affichent pas (je me suis peut être inscrit sans les renseigner aussi, à checker)
+- http://localhost:3000/users/sign_in : alert si on se plante
 
 
 page à intégrer :

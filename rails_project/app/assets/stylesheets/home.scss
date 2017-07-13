@@ -5,16 +5,16 @@
 }
 
 div.c-wrapper{
-  width: 40%; /* for example */
+  width: 40%;
   margin: auto;
 }
 
 .carousel-inner{
-  height:300px;
+  height: auto;
 }
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img{
-  width: 100%; /* use this, or not */
+  width: 100%;
   margin: auto;
 }
 
@@ -31,4 +31,30 @@ div.c-wrapper{
 .img-une img{
   width:200px;
   height:300px;
+}
+
+.item.active{
+  height : 100%;
+}
+
+.banner{
+  position: relative;
+  //top: -20px;
+  right: 1px;
+}
+
+.main-title{
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  width: 35%;
+  height: 20%;
+  padding: 20px;
+  display: flex;
+}
+
+.main-title h1{
+  margin: auto;
 }
