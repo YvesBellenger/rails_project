@@ -16,14 +16,14 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid catalogue">
 
   <hr>
 
   <h1>Catalogue</h1>
 
   <% if @req %>
-    <%= link_to raw("<button> Voir tous les livres</button>") %>
+      <%=link_to "Voir tous les livres", books_path, class: 'btn btn-default' %>
   <% end %>
   <div class="row" id="liste-books">
     <% @books.order('date desc').each do |book| %>

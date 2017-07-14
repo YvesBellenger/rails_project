@@ -50,13 +50,17 @@ input[type="search"]:focus {
   display: flex;
 }
 
+.catalogue a{
+  margin: 20px;
+}
+
 .small-img{
   width: 60px;
   height: 100px;
 }
 
 #liste-books{
-  margin-top:15px;
+  margin-top:20px;
 }
 
 #new-book{
@@ -75,8 +79,37 @@ input[type="search"]:focus {
 
 .book-catalogue{
   margin-bottom: 70px;
-  text-align: center
+  text-align: center;
+  .btn.btn-default{
+    margin-top: 50px;
+  }
 }
 
+.add-book{
+  .book-catalogue{
+    margin-bottom: 30px;
+  }
+}
 
+.form-add-book{
+  margin-top: 100px;
+  .form-actions{
+    margin-top: 29px;
+    display:flex;
+    justify-content: flex-end;
+  }
+  .form-actions input{
+    margin-right: 10px;
+  }
+}
 
+#page-addbook h1{
+  margin-top: 70px;
+}
+
+//.left-col, .right-col{
+//  border-top: solid 1px grey;
+//  border-bottom: solid 1px grey;
+//  padding-top: 10px;
+//  padding-bottom: 10px;
+//}

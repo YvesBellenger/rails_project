@@ -1,16 +1,18 @@
 - pagination pour http://localhost:3000/books et http://localhost:3000/searchaddbook
-- http://localhost:3000/searchaddbook : affichage d'une sélection de livre ?
+- http://localhost:3000/searchaddbook : affichage d'une sélection de livre ? bouton « voir tous les livres » redirige vers l’ajout manuel d’un nouveau livre (au lieu d’afficher une liste de tous les livres), ajout d’un filtre par catégorie (sf, fantastique) ? 
 - système de note ?
-- profil : nom et prénom ne s’affichent pas (je me suis peut être inscrit sans les renseigner aussi, à checker)
-- http://localhost:3000/users/sign_in : alert si on se plante
-- ajouter custom font 
+- http://localhost:3000/users/sign_in : mettre un alert si on se plante ? (« mauvais mot de passe », etc…
+- http://localhost:3000/books/new : si on ne remplit pas le champ stock et qu’on envoie le formulaire, erreur : Showing /Users/yves/Mamp/rails_project_esgi/rails_project/rails_project/app/views/books/show.html.erb where line #38 raised:comparison of String with 0 failed 
+	——> ligne 28 : if stock_book(book) > 0
+
+
 
 page à intégrer :
 
-http://localhost:3000/
-http://localhost:3000/books
-http://localhost:3000/books?q=test
-http://localhost:3000/books/new
+ok http://localhost:3000/
+ok http://localhost:3000/books
+ok http://localhost:3000/books?q=test
+ok http://localhost:3000/books/new
 http://localhost:3000/books/1
 http://localhost:3000/books/1/edit
 http://localhost:3000/books/1/reservations
@@ -26,3 +28,64 @@ http://localhost:3000/users/1
 http://localhost:3000/users/sign_in
 http://localhost:3000/users/sign_up
 http://localhost:3000/users/password/new
+
+
+
+<%= simple_form_for @book do |f| %>
+    <%= f.error_notification %>
+
+    <div class="row form-add-book">
+
+      <div class="col-md-4 col-md-offset-2 left-col">
+
+        <div class="form-group col-md-12">
+          <%= f.input :title, label: 'Titre', class: 'form-control' %>
+        </div>
+
+        <div class="form-group col-md-12">
+          <%= f.label 'Résumé' %>
+          <%= f.text_area :text, label: 'Résumé', class: 'form-control', rows: '5' %>
+        </div>
+
+        <div class="form-group col-md-12">
+          <%= f.input :author, label: 'Auteur', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="col-md-4 right-col">
+
+        <div class="form-group col-md-12">
+          <% if @book.date.present? %>
+              <%= f.input :date, class: 'form-control datepicker', :value => I18n.localize(@book.date.to_date, :format => :default) %>
+          <% else %>
+              <%= f.input :date, :class => 'datepicker' %>
+          <% end %>
+        </div>
+
+        <div class="form-group col-md-12">
+          <%= f.label 'Stock' %>
+          <%= f.number_field :stock, label: 'Stock', class: 'form-control' %>
+        </div>
+
+        <div class="form-group col-md-12">
+          <%= f.input :avatar, label: 'Choisir une couverture', as: :file %>
+        </div>
+
+        <div class="form-actions col-md-12">
+          <%= f.button :submit, 'Ajouter ce livre', class: 'btn btn-primary' %>
+          <%=link_to "Revenir au catalogue", books_path, class: 'btn btn-default' %>
+        </div>
+      </div>
+
+    </div>
+
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: "dd MM yyyy",
+            language: "fr"
+        });
+    });
+</script>
