@@ -1,9 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-<h1>Nouvelle réservation pour <%= @book.title  %> de <%= @book.author %></h1>
+<div id="page-reservation-new">
+  <h1>Nouvelle réservation pour <%= @book.title  %> de <%= @book.author %></h1>
 
-<img src="<%= @book.avatar.url() %>" class="img-une"> <br><br>
+  <div class="row form-new-reservation">
+    <div class="col-md-2 col-md-offset-4 book-catalogue">
+      <img src="<%= @book.avatar.url() %>" class="img-une">
+    </div>
 
-<%= render 'form', reservation: @reservation, book: @book %>
+    <%= render 'form', reservation: @reservation, book: @book %>
 
-<%= link_to 'Retour', @book %>
+  </div>
+</div>

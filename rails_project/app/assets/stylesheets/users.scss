@@ -1,3 +1,15 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#list-users {
+  th:nth-child(5),
+  th:nth-child(6){
+    text-align: center;
+  }
+}
+
+.sign-in .margin-left{
+  margin-left: 20px;
+}
+

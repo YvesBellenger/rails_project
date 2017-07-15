@@ -1,37 +1,53 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-<p>
-  <strong>Prenom:</strong>
-  <%= @user.prenom %>
-</p>
+<div id="page-profil">
 
-<p>
-  <strong>Nom:</strong>
-  <%= @user.nom %>
-</p>
-
-
-
-
-<p>
-  <strong>Mail:</strong>
-  <%= @user.email %>
-</p>
-<div class="row">
-  <%= link_to raw('<button>Editer mes informations</button>'), edit_user_path(@user) %><br><br>
-  <%= link_to raw('<button>Changer mot de passe</button>'), edit_user_registration_path %>
-</div>
-<h2>Mes livres en cours de réservation</h2>
-
-<div class="row">
-  <% @reservations.where(:user_id => @user.id, :rendu => false).order('date_fin asc').each do |book_reservation| %>
-    <div class="book-catalogue col-lg-2">
-      <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation_path(book_reservation.book, book_reservation) %>
-      <h5 class="book-title"><%= book_reservation.book.title %></h5>
-      <% if Date.today >= book_reservation.date_fin%>
-          <br><br><h4>A rendre</h4>
-      <% end %>
+  <div class="row">
+    <div class="col-md-12 title-margin">
+      <h1>Mon profil</h1>
     </div>
-  <% end %>
-</div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-6 info-user">
+      <p>
+        <strong>Prenom:</strong>
+        <%= @user.prenom %>
+      </p>
+
+      <p>
+        <strong>Nom:</strong>
+        <%= @user.nom %>
+      </p>
+
+      <p>
+        <strong>Mail:</strong>
+        <%= @user.email %>
+      </p>
+
+        <%= link_to 'Editer mes informations', edit_user_path(@user), class:'btn btn-default' %>
+        <%= link_to 'Changer mon mot de passe', edit_user_registration_path, class:'btn btn-default' %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 title-margin no-margin">
+      <h1>Mes livres en cours de réservation</h1>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <% @reservations.where(:user_id => @user.id, :rendu => false).order('date_fin asc').each do |book_reservation| %>
+        <div class="book-catalogue col-lg-2">
+          <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation_path(book_reservation.book, book_reservation) %>
+          <h5 class="book-title"><%= book_reservation.book.title %></h5>
+          <% if Date.today >= book_reservation.date_fin%>
+              <br><br><h4>A rendre</h4>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+
+</div>

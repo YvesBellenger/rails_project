@@ -1,20 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-<div class="container-fluid">
-  <div class="row">
-    <h1>Catalogue</h1>
-    <div class="col-md-4 col-md-offset-4">
-      <form method="get" class="searchform group">
-        <label for="search-box">
-          <span class="fa fa-2x fa-search"></span>
-        </label>
+<div class="row banner">
+  <%=image_tag("banner-3.jpg", alt: "banner")%>
+</div>
 
-        <input type="search" id="search-box" name="q" placeholder="Rechercher">
-      </form>
-    </div>
+<div class="row search-wrapper">
+  <div class="col-md-4 col-md-offset-4 vertical-align">
+    <form method="get" class="searchform group">
+      <label for="search-box">
+        <span class="fa fa-2x fa-search"></span>
+      </label>
+
+      <input type="search" id="search-box" name="q" placeholder="Rechercher">
+    </form>
   </div>
+</div>
+
+<div class="container-fluid catalogue">
+
+  <hr>
+
+  <h1>Catalogue</h1>
+
   <% if @req %>
-    <%= link_to raw("<button> Voir tous les livres</button>") %>
+      <%=link_to "Voir tous les livres", books_path, class: 'btn btn-default' %>
   <% end %>
   <div class="row" id="liste-books">
     <% @books.order('date desc').each do |book| %>
@@ -24,8 +33,8 @@
         </div>
     <% end %>
 
-
   </div>
+
 </div>
 
 

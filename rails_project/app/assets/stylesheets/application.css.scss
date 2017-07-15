@@ -63,3 +63,76 @@ code {
 .nav li  {
   color:white;
 }
+
+h1{
+  text-transform: uppercase;
+  margin: 20px;
+}
+
+/***** NEED A PARENT WITH DISPLAY FLEX *****/
+
+.vertical-align{
+  margin: auto;
+}
+
+/****** NAVBAR *******/
+
+.nav.navbar-nav.navbar-right {
+  display: flex;
+}
+
+.nav.navbar-nav.navbar-right li:first-child{
+  margin: auto;
+  margin-right: 10px;
+}
+
+.nav.navbar-nav.navbar-right li:first-child p{
+  margin: 0 0 0px !important;
+}
+
+.nav.navbar-nav.navbar-right li:first-child p a{
+  color: #337ab7;
+  margin-left: 5px;
+}
+
+.navbar.navbar-inverse{
+  margin-bottom: 0px;
+}
+
+.navbar-brand.logo{
+  padding: 0;
+  padding-left: 15px;
+}
+
+.navbar-brand.logo img{
+  height: 100%;
+  width: auto;
+  padding: 10px;
+}
+
+/******** FONTS ********/
+
+@font-face {
+  font-family: "Drugs";
+  src: url(../font/Drugs.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "CaviarDreams";
+  src: url(../font/CaviarDreams.ttf) format("truetype");
+}
+
+h1, h2{
+  font-family: "Drugs";
+}
+
+/******** FOOTER ********/
+
+
+.footer{
+  background-color: #222222;
+  p{
+    color: #FFFFFF;
+    text-align: center;
+  }
+}

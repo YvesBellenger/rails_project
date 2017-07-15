@@ -1,20 +1,26 @@
-<div class="row">
-  <div class="book-catalogue col-lg-2">
-    <%= link_to raw("<button>Ajouter manuellement un nouveau livre </button>"), new_book_path %>
+<div class="row banner">
+  <%=image_tag("banner-3.jpg", alt: "banner")%>
+</div>
+
+<div class="row search-wrapper">
+  <div class="col-md-4 col-md-offset-4 vertical-align">
+    <form method="get" class="searchform group">
+      <label for="search-box">
+        <span class="fa fa-2x fa-search"></span>
+      </label>
+
+      <input type="search" id="search-box" name="q" placeholder="Rechercher un livre via google books">
+    </form>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-12">
-  <form class="searchform group" method="get" >
-    <label for="search-box">
-      <span class="fa fa-2x fa-search"></span>
-    </label>
-
-    <input type="search" id="search-box" name="q" placeholder="Rechercher un livre via google books">
-  </form>
+<div class="row add-book">
+  <div class="book-catalogue col-md-4 col-md-offset-4">
+    <%=link_to "Ajouter manuellement un nouveau livre", new_book_path, class: 'btn btn-default' %>
   </div>
 </div>
+
+<hr>
 
 <% if @items.present? %>
     <div class="row">

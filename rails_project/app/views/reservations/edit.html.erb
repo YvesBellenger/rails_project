@@ -1,7 +1,38 @@
-<h1>Modifier réservation pour <%= @book.title  %> de <%= @book.author %></h1>
+<%= flash_messages %>
 
-<img src="<%= @book.avatar.url() %>" class="img-une"> <br><br>
+<div id="page-edit-book-reservation">
 
-<%= render 'form_edit', reservation: @reservation, book: @book %>
+  <div class="row">
+    <div class="col-md-12 title-margin">
+      <h1>Modifier réservation pour <%= @book.title  %> de <%= @book.author %></h1>
+    </div>
+  </div>
 
-<%= link_to 'Annuler', book_reservation_path(@book, @reservation) %>
+  <div class="row">
+
+    <% if @book.avatar.exists? %>
+        <div class="col-md-2 col-md-offset-4 book-catalogue">
+          <img src="<%= @book.avatar.url() %>" class="img-une">
+        </div>
+    <% end %>
+
+    <%= render 'form_edit', reservation: @reservation, book: @book %>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

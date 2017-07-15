@@ -1,15 +1,19 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-<% if @book.avatar.exists? %>
-    <div class="book-catalogue">
-      <%= image_tag @book.avatar.url(:medium) %>
-    </div>
-<% end %>
+<div class="row page-edit-book">
 
-<h1>Modifier</h1>
+  <% if @book.avatar.exists? %>
+      <div class="col-md-2 col-md-offset-2 book-catalogue">
+        <%= image_tag @book.avatar.url(:medium) %>
+      </div>
+  <% end %>
 
-<%= render 'form', book: @book %>
+  <div class="col-md-8">
+    <h1>Modifier</h1>
+    <%= render 'form', book: @book %>
+  </div>
 
-<%= link_to 'Show', @book %> |
-<%= link_to 'Back', books_path %>
+
+</div>
+
 

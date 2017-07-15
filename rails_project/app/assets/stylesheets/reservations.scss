@@ -21,3 +21,67 @@
 #liste-reservations tr{
   border-bottom: 1px solid #f5f5f5;
 }
+
+#page-reservation, #page-reservation-all{
+  h1{
+    margin-top: 70px;
+  }
+  .alert{
+    margin-bottom: 0px;
+    padding: 6px;
+    text-align: center;
+  }
+}
+
+#page-reservation{
+  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(6),
+  .liste-reservations th:nth-child(7){
+    text-align: center;
+  }
+}
+
+#page-reservation-all{
+  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(7),
+  .liste-reservations th:nth-child(8){
+    text-align: center;
+  }
+}
+
+.liste-reservations,
+.form-new-reservation{
+  margin: 50px 0 50px 0;
+}
+
+#page-reservation-new, #page-statut-reservation{
+  h1{
+    margin-top: 70px;
+  }
+}
+
+#page-statut-reservation .statut-reservation{
+  h1{
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+}
+
+.statut-reservation{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.title-margin h1{
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+#page-profil .title-margin.no-margin h1,
+#page-utilisateur .title-margin.no-margin h1{
+  margin-bottom: 0px;
+}
+
+.info-user{
+  margin-left: 20px;
+}

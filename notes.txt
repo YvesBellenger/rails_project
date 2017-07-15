@@ -1,0 +1,47 @@
+- pagination pour http://localhost:3000/books et http://localhost:3000/searchaddbook
+- http://localhost:3000/searchaddbook : affichage d'une sélection de livre ? ajout d’un filtre par catégorie (sf, fantastique) ? 
+- système de note ?
+- http://localhost:3000/users/sign_in : mettre un alert si on se plante ? (« mauvais mot de passe », etc…
+- http://localhost:3000/books/new : si on ne remplit pas le champ stock et qu’on envoie le formulaire, erreur : Showing /Users/yves/Mamp/rails_project_esgi/rails_project/rails_project/app/views/books/show.html.erb where line #38 raised:comparison of String with 0 failed 
+	——> ligne 28 : if stock_book(book) > 0
+- http://localhost:3000/books/1 : mettre en bas les livres du même auteur ? 
+- add une photo de profil ? (bonus ++++)
+- réservations en cours : pouvoir filtrer entre les livres rendus et les livres non rendus
+
+
+
+page à intégrer :
+
+ok http://localhost:3000/
+ok http://localhost:3000/books
+ok http://localhost:3000/books?q=test
+ok http://localhost:3000/books/new
+ok http://localhost:3000/books/1 (possibilité d’ajouter liste de livres du même auteur)
+ok http://localhost:3000/books/1/edit
+ok http://localhost:3000/books/1/reservations
+ok http://localhost:3000/books/1/reservations/new
+ok http://localhost:3000/books/1/reservations/20
+ok http://localhost:3000/books/1/reservations/20/edit
+ok http://localhost:3000/profil
+ok http://localhost:3000/searchaddbook
+ok http://localhost:3000/searchaddbook?q=test
+ok http://localhost:3000/searchaddbook/bookinfos?q=YF97cTdUUIsC
+ok http://localhost:3000/users
+ok http://localhost:3000/users/1
+ok http://localhost:3000/users/sign_in
+ok http://localhost:3000/users/sign_up
+ok http://localhost:3000/users/password/new
+
+
+
+
+
+
+
+
+
+
+
+
+
+

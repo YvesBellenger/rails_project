@@ -1,46 +1,51 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-
-<% if @item["volumeInfo"]["imageLinks"].present? %>
-    <div class="book-catalogue">
-      <img src='<%= @item["volumeInfo"]["imageLinks"]["thumbnail"] %>' class='img-une'>
-    </div>
-<% else %>
-    <div class="book-catalogue">
-      <img src='<%= image_url("not_available.jpg") %>' class='img-une'>
-    </div>
-<% end %>
-
-
-<p>
-  <strong>Titre :</strong>
-  <% if @item["volumeInfo"]["description"].present? %>
-    <%= @item["volumeInfo"]["title"] %>
+<div class="row page-book">
+  <div class="col-md-2 col-md-offset-3 book-catalogue">
+  <% if @item["volumeInfo"]["imageLinks"].present? %>
+      <div class="book-catalogue">
+        <img src='<%= @item["volumeInfo"]["imageLinks"]["thumbnail"] %>' class='img-une'>
+      </div>
+  <% else %>
+      <div class="book-catalogue">
+        <img src='<%= image_url("not_available.jpg") %>' class='img-une'>
+      </div>
   <% end %>
-</p>
+  </div>
+
+  <div class="col-md-4">
+
+    <% if @item["volumeInfo"]["description"].present? %>
+        <h1><%= @item["volumeInfo"]["title"] %></h1>
+    <% end %>
+
+    <p>
+      <% if @item["volumeInfo"]["description"].present? %>
+          <%= raw @item["volumeInfo"]["description"] %>
+      <% end %>
+    </p>
+
+
+    <p>
+      <strong>Auteur :</strong>
+      <% if @item["volumeInfo"]["authors"].present? %>
+          <%= @item["volumeInfo"]["authors"][0] %>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Date de publication:</strong>
+      <% if  @item["volumeInfo"]["publishedDate"].present? %>
+          <%= afficher_date(@item["volumeInfo"]["publishedDate"]) %>
+      <% end %>
+    </p>
+
+    <%= link_to 'Ajouter le livre à la base de données', new_book_path(:q => @item["id"]), method: :add_book_api, class: 'btn btn-default' %><br><br>
+
+  </div>
+</div>
 
 
 
-<p>
-  <strong>Description :</strong>
-  <% if @item["volumeInfo"]["description"].present? %>
-    <%= raw @item["volumeInfo"]["description"] %>
-  <% end %>
-</p>
 
 
-<p>
-  <strong>Auteur :</strong>
-  <% if @item["volumeInfo"]["authors"].present? %>
-    <%= @item["volumeInfo"]["authors"][0] %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Date de publication:</strong>
-  <% if  @item["volumeInfo"]["publishedDate"].present? %>
-    <%= afficher_date(@item["volumeInfo"]["publishedDate"]) %>
-  <% end %>
-</p>
-
-<%= link_to raw('<button>Ajouter le livre à la Base de données</button>'), new_book_path(:q => @item["id"]), method: :add_book_api %><br><br>

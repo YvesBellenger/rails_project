@@ -1,34 +1,37 @@
-<h1>Liste des livres pas encore rendus</h1>
+<div id="page-reservation-all">
+  <h1>Liste des livres non rendus</h1>
 
-<div class="row">
-  <div class="col-lg-12">
-    <table id="liste-reservations">
-      <tr>
-        <th>Compte</th>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Livre réservé</th>
-        <th>Date de fin de réservation</th>
-        <th>Date dépassée</th>
-        <th>Réservation</th>
-      </tr>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="liste-reservations table table-striped">
+        <tr>
+          <th>Compte</th>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Livre réservé</th>
+          <th>Date de fin de réservation</th>
+          <th>Date dépassée</th>
+          <th>Réservation</th>
+        </tr>
         <% @reservations.where(:rendu => false).order('date_fin asc').each do |reservation| %>
-          <tr>
-            <td><%= link_to 'Voir', user_path(reservation.user)%></td>
-            <td><%= reservation.user.prenom%></td>
-            <td><%= reservation.user.nom%></td>
-            <td><%= reservation.user.email %></td>
-            <td> <%= reservation.book.title %></td>
-            <td><%= l reservation.date_fin.to_date, :format => :long%></td>
-          <% if Date.current >= reservation.date_fin.to_date %>
-                <th> Oui </th>
-          <% else %>
-                <th> Non </th>
-          <%end%>
-            <th><%= link_to 'Détail',book_reservation_path(reservation.book,reservation)%></th>
+            <tr>
+              <th><%= link_to 'Voir', user_path(reservation.user), class: 'btn btn-default' %></th>
+              <td><%= reservation.user.prenom%></td>
+              <td><%= reservation.user.nom%></td>
+              <td><%= reservation.user.email %></td>
+              <td> <%= reservation.book.title %></td>
+              <td><%= l reservation.date_fin.to_date, :format => :long%></td>
+              <% if Date.current >= reservation.date_fin.to_date %>
+                  <th> <div class="alert alert-danger">Oui</div></th>
+              <% else %>
+                  <th> Non </th>
+              <%end%>
+              <th><%= link_to 'Détail',book_reservation_path(reservation.book,reservation), class: 'btn btn-default'%></th>
 
         <% end %>
-    </table>
+      </table>
+    </div>
   </div>
+
 </div>
