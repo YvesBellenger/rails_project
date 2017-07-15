@@ -21,3 +21,34 @@
 #liste-reservations tr{
   border-bottom: 1px solid #f5f5f5;
 }
+
+#page-reservation, #page-reservation-all{
+  h1{
+    margin-top: 70px;
+  }
+  .alert{
+    margin-bottom: 0px;
+    padding: 6px;
+    text-align: center;
+  }
+}
+
+#page-reservation{
+  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(6),
+  .liste-reservations th:nth-child(7){
+    text-align: center;
+  }
+}
+
+#page-reservation-all{
+  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(7),
+  .liste-reservations th:nth-child(8){
+    text-align: center;
+  }
+}
+
+.liste-reservations{
+  margin: 50px 0 50px 0;
+}

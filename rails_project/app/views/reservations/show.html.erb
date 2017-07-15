@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
 <h2> Statut de la réservation </h2>
 <h3> <%= @book.title %></h3>
@@ -26,8 +26,8 @@
 <% end %>
 
 <% if @reservation.user = current_user and !@reservation.rendu %>
-  <%= link_to raw('<button>Rendre le livre</button>'), book_reservation_path(@book, @reservation), method: :livre_rendu %><br><br>
+  <%= link_to 'Rendre le livre', book_reservation_path(@book, @reservation), method: :livre_rendu, class: 'btn btn-default' %><br><br>
 <% end %>
 
-<%= link_to 'Modifier la réservation', edit_book_reservation_path(@book, @reservation) %> <br>
-<%= link_to 'Fiche du livre', book_path(@book) %>
+<%= link_to 'Modifier la réservation', edit_book_reservation_path(@book, @reservation), class: 'btn btn-default' %> <br>
+<%= link_to 'Fiche du livre', book_path(@book), class: 'btn btn-default' %>

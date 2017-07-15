@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
+/****** BARRE DE RECHERCHER *******/
 
 .searchform {
   display: block;
@@ -50,6 +50,8 @@ input[type="search"]:focus {
   display: flex;
 }
 
+/******* CATALOGUE  ********/
+
 .catalogue a{
   margin: 20px;
 }
@@ -95,6 +97,7 @@ input[type="search"]:focus {
   margin-top: 100px;
   .form-actions{
     margin-top: 29px;
+    margin-bottom: 50px;
     display:flex;
     justify-content: flex-end;
   }
@@ -113,3 +116,24 @@ input[type="search"]:focus {
 //  padding-top: 10px;
 //  padding-bottom: 10px;
 //}
+
+/******** PAGE D'UN LIVRE ********/
+
+.page-book{
+  margin-top: 100px;
+  .btn.btn-default{
+    margin-top: 13px;
+    margin-bottom: 20px;
+  }
+  h1{
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+}
+
+.page-edit-book{
+  margin-top: 100px;
+  h1{
+    margin-top: 0;
+  }
+}

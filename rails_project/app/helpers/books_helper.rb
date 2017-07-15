@@ -26,9 +26,9 @@ module BooksHelper
 
   def en_stock(book)
     if stock_book(book) > 0
-      link_to raw('<button>Reserver le livre</button>'), new_book_reservation_path(book)
+      link_to "Réserver le livre", new_book_reservation_path(book), class: 'btn btn-default'
     else
-      raw '<p>Nous n\'avons plus le livre en stock</p>'
+      raw '<div class="alert alert-info"><p>Nous n\'avons plus le livre en stock</p></div>'
     end
   end
 
