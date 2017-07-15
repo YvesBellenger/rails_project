@@ -17,15 +17,15 @@ ok http://localhost:3000/books/new
 ok http://localhost:3000/books/1 (possibilité d’ajouter liste de livres du même auteur)
 ok http://localhost:3000/books/1/edit
 ok http://localhost:3000/books/1/reservations
-http://localhost:3000/books/1/reservations/new
-http://localhost:3000/books/1/reservations/20
-http://localhost:3000/books/1/reservations/20/edit
-http://localhost:3000/profil
-http://localhost:3000/searchaddbook
-http://localhost:3000/searchaddbook?q=test
-http://localhost:3000/searchaddbook/bookinfos?q=YF97cTdUUIsC
-http://localhost:3000/users
-http://localhost:3000/users/1
+ok http://localhost:3000/books/1/reservations/new
+ok http://localhost:3000/books/1/reservations/20
+ok http://localhost:3000/books/1/reservations/20/edit
+ok http://localhost:3000/profil
+ok http://localhost:3000/searchaddbook
+ok http://localhost:3000/searchaddbook?q=test
+ok http://localhost:3000/searchaddbook/bookinfos?q=YF97cTdUUIsC
+ok http://localhost:3000/users
+ok http://localhost:3000/users/1
 http://localhost:3000/users/sign_in
 http://localhost:3000/users/sign_up
 http://localhost:3000/users/password/new

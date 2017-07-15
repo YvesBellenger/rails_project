@@ -1,37 +1,56 @@
-<p id="notice"><%= notice %></p>
+<%= flash_messages %>
 
-<p>
-  <strong>Nom:</strong>
-  <%= @user.nom %>
-</p>
-
-<p>
-  <strong>Prenom:</strong>
-  <%= @user.prenom %>
-</p>
-
-
-<p>
-  <strong>Mail:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Date d'inscription:</strong>
-  <%= l @user.created_at.to_date, :format => :long, locale: :fr %>
-</p>
-
-<h2> Livres de l'utilisateurs en cours de réservation </h2>
-<div class="row">
-  <% @reservations.where(:user_id => @user.id, :rendu => false).each do |book_reservation| %>
-    <div class="book-catalogue col-lg-2">
-      <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation.book %>
-    <h3><%= book_reservation.book.title %></h3>
+<div id="page-utilisateur">
+  <div class="row">
+    <div class="col-md-12 title-margin">
+      <h1>Profil de <%= @user.nom + ' ' + @user.prenom %></h1>
     </div>
-  <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 info-user">
+
+      <p>
+        <strong>Prenom:</strong>
+        <%= @user.prenom %>
+      </p>
+
+      <p>
+        <strong>Nom:</strong>
+        <%= @user.nom %>
+      </p>
+
+      <p>
+        <strong>Mail:</strong>
+        <%= @user.email %>
+      </p>
+
+      <p>
+        <strong>Date d'inscription:</strong>
+        <%= l @user.created_at.to_date, :format => :long, locale: :fr %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 title-margin no-margin">
+      <h1> Livres de l'utilisateurs en cours de réservation </h1>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <% @reservations.where(:user_id => @user.id, :rendu => false).each do |book_reservation| %>
+        <div class="book-catalogue col-lg-2">
+          <%=  link_to raw("<img src='#{book_reservation.book.avatar.url()}' class='img-une'>"), book_reservation.book %>
+          <h3><%= book_reservation.book.title %></h3>
+        </div>
+    <% end %>
+  </div>
+
 </div>
 
-<div class="row">
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
-</div>
+
+
+

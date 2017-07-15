@@ -1,30 +1,29 @@
-<%= form_for([book, reservation]) do |f| %>
-  <% if reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+<%= simple_form_for([book, reservation]) do |f| %>
+    <%= f.error_notification %>
 
-      <ul>
-      <% reservation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="col-md-4">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <%= f.input :date_fin, class: 'form-control datepicker', :required => :true, :value => I18n.localize(Date.current.to_date, :format => :long) %>
+      </div>
     </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :date_fin %>
-    <%= f.text_field :date_fin, :class => 'datepicker', :required => :true, :value => I18n.localize(Date.current.to_date, :format => :long) %>
+    <div class="row">
+      <div class="form-actions col-md-12">
+        <%= f.button :submit, 'Réserver', class: 'btn btn-primary' %>
+        <%= link_to 'Voir la fiche du livre', @book, class: 'btn btn-default' %>
+      </div>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Réserver" %>
-  </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.datepicker').datepicker({
+                format: "dd MM yyyy",
+                language: "fr"
+            });
+        });
+    </script>
+
 <% end %>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.datepicker').datepicker({
-            format: "dd MM yyyy",
-            language: "fr"
-        });
-    });
-</script>
+

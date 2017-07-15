@@ -49,6 +49,39 @@
   }
 }
 
-.liste-reservations{
+.liste-reservations,
+.form-new-reservation{
   margin: 50px 0 50px 0;
+}
+
+#page-reservation-new, #page-statut-reservation{
+  h1{
+    margin-top: 70px;
+  }
+}
+
+#page-statut-reservation .statut-reservation{
+  h1{
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+}
+
+.statut-reservation{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.title-margin h1{
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+#page-profil .title-margin.no-margin h1,
+#page-utilisateur .title-margin.no-margin h1{
+  margin-bottom: 0px;
+}
+
+.info-user{
+  margin-left: 20px;
 }
