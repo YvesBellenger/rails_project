@@ -6,7 +6,7 @@
         <th>Nom</th>
         <th>Email</th>
         <th>Livre réservé</th>
-        <% if !@reservations.first.rendu %>
+        <% if @♣reservations.any? !@reservations.first.rendu %>
           <th>Date de fin de réservation</th>
           <th>Date dépassée</th>
         <% else %>
