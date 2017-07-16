@@ -39,4 +39,38 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model 'Reservation' do
+    edit do
+      field :date_fin do
+        strftime_format '%d-%m-%Y'
+      end
+      field :rendu
+    end
+  end
+
+  config.model 'Book' do
+    edit do
+      field :title
+      field :text
+      field :author
+      field :date do
+        strftime_format '%d-%m-%Y'
+      end
+      field :stock
+      field :avatar
+      field :google_book_id
+    end
+  end
+
+  config.model 'User' do
+    edit do
+      field :nom
+      field :prenom
+      field :email
+      field :password
+      field :password_confirmation
+      field :roles
+    end
+  end
 end

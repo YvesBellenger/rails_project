@@ -1,0 +1,8 @@
+<% title "Réservations terminées" %>
+<div id="page-reservation-all">
+  <h1>Liste des réservations terminées</h1>
+  <%= link_to 'Voir les réservations en cours', reservations_path, class: 'btn btn-default' %>
+  <%= render 'reservations_all', reservations: @reservations%>
+
+
+</div>

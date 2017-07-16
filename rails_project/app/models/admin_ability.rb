@@ -1,5 +1,7 @@
 class AdminAbility
   include CanCan::Ability
+
+  #Définition des autorisations pour rails admin
   def initialize(user)
     user ||= User.new
     if user.has_role?(:admin)

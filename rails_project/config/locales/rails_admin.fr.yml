@@ -1,9 +1,9 @@
 fr:
   date:
-      formats:
-        default: ! '%d/%m/%Y'
-        long: ! '%d %B %Y'
-        short: ! '%d %b'
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
   admin:
     js:
       true: Vrai
@@ -152,3 +152,4 @@ fr:
         default_col_sep: ";"
         col_sep: "Séparateur de colonnes"
         col_sep_help: "Laisser vide pour utiliser la valeur par défaut recommandée pour votre système ('%{value}')"
+

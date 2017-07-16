@@ -13,9 +13,10 @@ Rails.application.routes.draw do
 
 
   post "books/:book_id/reservations/:id" => 'reservations#livre_rendu'
-  get 'reservations' => 'reservations#reservations_all'
-  get '/searchaddbook' => 'books#searchadd', as: :search_path
-  get '/searchaddbook/bookinfos' => 'books#searchaddinfos'
+  get '/reservations' => 'reservations#reservations_all'
+  get '/reservations/rendus' => 'reservations#reservations_all_rendus'
+  get '/searchadd' => 'books#searchadd', as: :search_path
+  get '/searchadd/bookinfos' => 'books#searchaddinfos'
   post '/books/new' => 'books#add_book_api'
 
   get '/profil' => 'users#profil', as: :profil_path
