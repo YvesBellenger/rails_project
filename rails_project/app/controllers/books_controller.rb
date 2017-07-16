@@ -55,7 +55,7 @@ class BooksController < ApplicationController
     if(uri.query.present?)
       parameters = CGI::parse(uri.query)
       if (parameters['q'][0].present?)
-        response = RestClient.get 'https://www.googleapis.com/books/v1/volumes?q='+parameters['q'][0]+'&maxResults=40&printType=books'
+        response = RestClient.get 'https://www.googleapis.com/books/v1/volumes?'+URI.encode_www_form( 'q' => parameters['q'][0])+'&maxResults=40&printType=books'
         @items = JSON.parse(response.body.force_encoding('UTF-8'))
       end
     end
