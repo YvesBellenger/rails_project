@@ -1,3 +1,5 @@
+<% title "Liste des utilisateurs" %>
+
 <%= flash_messages %>
 
 <div id="list-users">
@@ -7,6 +9,17 @@
     </div>
   </div>
 
+  <div class="search-wrapper">
+    <div class="col-md-4 col-md-offset-4 vertical-align">
+      <form method="get" class="searchform group">
+        <label for="search-box">
+          <span class="fa fa-2x fa-search"></span>
+        </label>
+
+        <input type="search" id="search-box" name="q" placeholder="Rechercher par nom, prénom, ou email...">
+      </form>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-12 ">
@@ -32,6 +45,11 @@
         <% end %>
       </table>
     </div></div>
+  <% if @users.any? %>
+      <div class="row">
+        <%= will_paginate @users, renderer: BootstrapPagination::Rails, :previous_label => 'Page précédente', :next_label => 'Page suivante' %>
+      </div>
+  <% end %>
   <br>
 </div>
 

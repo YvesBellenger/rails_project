@@ -7,6 +7,20 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+
+    url    =request.fullpath
+    uri    = URI.parse(url)
+    @req=false
+    @users = User.order('nom asc').paginate(:page => params[:page], :per_page => 20)
+
+    if(uri.query.present?)
+      parameters = CGI::parse(uri.query)
+      if (parameters['q'][0].present?)
+        @users = User.where("prenom LIKE (?) OR nom LIKE (?) OR email LIKE (?)", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%").paginate(:page => params[:page], :per_page => 20)
+        @req=true
+      end
+    end
+
   end
 
   # GET /users/1
@@ -38,7 +52,12 @@ class UsersController < ApplicationController
   def update
     set_user
     if @user.update(user_params)
-      redirect_to @user, notice: 'L\'utilisateur a bien été mis à jour.'
+      if current_user != @user
+        redirect_to @user, notice: 'L\'utilisateur a bien été mis à jour.'
+      else
+        redirect_to profil_path_url, notice: 'Votre profil a bien été mis à jour'
+      end
+
     else
       render :edit
     end

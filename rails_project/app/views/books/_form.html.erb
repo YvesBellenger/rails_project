@@ -30,10 +30,11 @@
       <% end %>
 
         <div class="form-group col-md-12">
+          <%= f.label :date %>
           <% if @book.date.present? %>
-              <%= f.input :date, class: 'form-control datepicker', :value => I18n.localize(@book.date.to_date, :format => :default) %>
+              <%= f.text_field :date, class: 'form-control datepicker', :value => I18n.localize(@book.date.to_date, :format => :default) %>
           <% else %>
-              <%= f.input :date, :class => 'datepicker' %>
+              <%= f.text_field :date, class: 'form-control datepicker' %>
           <% end %>
         </div>
 

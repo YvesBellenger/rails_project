@@ -1,4 +1,4 @@
-
+<% title "Accueil" %>
 <%= flash_messages %>
 
 
@@ -16,9 +16,10 @@
   <div class="row col-lg-12" id="la-une">
     <h1> Derniers livres ajoutés </h1>
     <div class="books-list">
-      <% @books.order("created_at desc").first(6).each do |book| %>
+
+      <% @books.each do |book| %>
           <div class="col-lg-2">
-            <%= book_a_la_une(book) %>
+            <%= book_image(book) %>
           </div>
       <% end %>
     </div>

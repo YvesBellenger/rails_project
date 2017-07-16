@@ -4,12 +4,19 @@
     <div class="col-md-4">
       <div class="row">
         <div class="form-group col-md-12">
+          <%= f.label :date_fin %>
           <% if @reservation.date_fin.present? %>
-              <%= f.input :date_fin, class: 'form-control datepicker', :value => I18n.localize(Date.current.to_date, :format => :long) %>
+              <%= f.text_field :date_fin, class: 'form-control datepicker', :value => I18n.localize(@reservation.date_fin.to_date, :format => :long) %>
           <% else %>
-              <%= f.input :date_fin, :class => 'datepicker' %>
+              <%= f.text_field :date_fin, class: 'form-control datepicker' %>
           <% end %>
         </div>
+        <% if can? :manage, :all %>
+          <div class="form-group col-md-12">
+            <%= f.label :rendu %>
+            <%= f.check_box :rendu, class: 'form-control' %>
+          </div>
+        <% end %>
       </div>
 
       <div class="row">

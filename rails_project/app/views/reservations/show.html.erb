@@ -1,5 +1,5 @@
+<% title "Réservation de " + @book.title %>
 <%= flash_messages %>
-
 <div id="page-statut-reservation">
   <div class="row">
     <div class="col-md-12">
@@ -16,31 +16,47 @@
     <div class="col-md-4">
 
       <h1> <%= @book.title %></h1>
-      <p>
-        <strong>Début de la réservation :</strong>
-        <%= l @reservation.date_debut.to_date, :format => :long %>
-      </p>
+      <% if !@reservation.rendu %>
+        <p>
+          <strong>Début de la réservation :</strong>
+          <%= l @reservation.date_debut.to_date, :format => :long %>
+        </p>
 
-      <p>
-        <strong>Réservé jusqu'au :</strong>
-        <%= l @reservation.date_fin.to_date, :format => :long %>
-      </p>
+        <p>
+          <strong>Réservé jusqu'au :</strong>
+          <%= l @reservation.date_fin.to_date, :format => :long %>
+        </p>
 
-      <p><b>Réservé par : </b><%= @reservation.user.prenom %> <%= @reservation.user.nom %></p>
-      <p><b>Courriel de contact : </b> <%= @reservation.user.email %></p>
+        <p><b>Réservé par : </b><%= @reservation.user.prenom %> <%= @reservation.user.nom %></p>
+        <p><b>Courriel de contact : </b> <%= @reservation.user.email %></p>
 
-      <% if can? :manange, :all %>
-          <p><b>Statut rendu : </b> <% if @reservation.rendu %> Rendu <% else %> Non rendu <% end %></p>
-      <% end %>
-      <% if Date.today >= @reservation.date_fin %>
-          <h3> Livre à rendre au plus vite </h3>
-      <% end %>
+        <% if can? :manage, :all %>
+            <p><b>Statut rendu : </b> <% if @reservation.rendu %> Rendu <% else %> Non rendu <% end %></p>
+        <% end %>
+        <% if Date.today >= @reservation.date_fin %>
+            <h3> Livre à rendre au plus vite </h3>
+        <% end %>
 
-      <% if @reservation.user = current_user and !@reservation.rendu %>
-          <%= link_to 'Rendre le livre', book_reservation_path(@book, @reservation), method: :livre_rendu, class: 'btn btn-default' %>
-      <% end %>
+        <% if @reservation.user == current_user and !@reservation.rendu %>
+            <%= link_to 'Rendre le livre', book_reservation_path(@book, @reservation), method: :livre_rendu, class: 'btn btn-default' %>
+        <% end %>
 
-      <%= link_to 'Modifier la réservation', edit_book_reservation_path(@book, @reservation), class: 'btn btn-default' %>
+          <% if can? :manage, :all %>
+              <%= link_to 'Compte de l\'utilisateur', user_path(@reservation.user),class: 'btn btn-default' %>
+          <% end %>
+
+        <%= link_to 'Modifier la réservation', edit_book_reservation_path(@book, @reservation), class: 'btn btn-default' %>
+
+      <% else %>
+          <p>
+            <strong>Début de la réservation :</strong>
+            <%= l @reservation.date_debut.to_date, :format => :long %>
+          </p>
+          <p><b>Réservé par : </b><%= @reservation.user.prenom %> <%= @reservation.user.nom %></p>
+          <p><b>Courriel de contact : </b> <%= @reservation.user.email %></p>
+
+          <p>Le livre a bien été rendu le <%= l @reservation.updated_at.to_date, :format => :long %></p>
+    <% end %>
       <%= link_to 'Fiche du livre', book_path(@book), class: 'btn btn-default' %>
     </div>
 

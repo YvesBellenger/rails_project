@@ -1,18 +1,20 @@
+<% title "Recherche API Google" %>
 <div class="row banner">
   <%=image_tag("banner-3.jpg", alt: "banner")%>
-</div>
+  <div class="search-wrapper">
+    <div class="col-md-4 col-md-offset-4 vertical-align">
+      <form method="get" class="searchform group">
+        <label for="search-box">
+          <span class="fa fa-2x fa-search"></span>
+        </label>
 
-<div class="row search-wrapper">
-  <div class="col-md-4 col-md-offset-4 vertical-align">
-    <form method="get" class="searchform group">
-      <label for="search-box">
-        <span class="fa fa-2x fa-search"></span>
-      </label>
-
-      <input type="search" id="search-box" name="q" placeholder="Rechercher un livre via google books">
-    </form>
+        <input type="search" id="search-box" name="q" placeholder="Rechercher un livre via google books">
+      </form>
+    </div>
   </div>
 </div>
+
+
 
 <div class="row add-book">
   <div class="book-catalogue col-md-4 col-md-offset-4">
@@ -22,17 +24,23 @@
 
 <hr>
 
-<% if @items.present? %>
+<% if @items.present? and @items["items"].present? %>
     <div class="row">
       <% @items["items"].each do |item| %>
           <div class="book-catalogue col-lg-2 col-md-3 col-sm-4 col-xs-6" >
             <% if item["volumeInfo"]["imageLinks"].present? %>
-                <%= link_to raw("<img src='#{item["volumeInfo"]["imageLinks"]["thumbnail"]}' class='img-une'>"), "/searchaddbook/bookinfos?q=#{item['id']}" %>
+                <%= link_to raw("<img src='#{item["volumeInfo"]["imageLinks"]["thumbnail"]}' class='img-une'>"), "/searchadd/bookinfos?q=#{item['id']}" %>
             <% else %>
-                <%= link_to raw("<img src='#{image_url("not_available.jpg")}' class='img-une'>"), "/searchaddbook/bookinfos?q=#{item['id']}" %>
+                <%= link_to raw("<img src='#{image_url("not_available.jpg")}' class='img-une'>"), "/searchadd/bookinfos?q=#{item['id']}" %>
             <% end %>
             <h5 class="book-title"><%= item["volumeInfo"]["title"] %></h5>
           </div>
       <% end %>
     </div>
 <% end %>
+
+<% if @items.present? and !@items["items"].present? %>
+    <div class="row">
+      <h2 class="text-center">Aucun résultat</h2>
+    </div>
+<% end%>

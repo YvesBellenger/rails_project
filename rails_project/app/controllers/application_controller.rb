@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :stock_book, :nombre_prete
+  helper_method :stock_book
+
 
   rescue_from CanCan::AccessDenied do |exception|
     if request.env['HTTP_REFERER'].present?
@@ -10,6 +11,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Permet de calculer le stock possédé par rapport au nombre de réservations en cours
   def stock_book(book)
     if(book.stock.present?)
       tmp = Reservation.where(:book_id => book.id, :rendu => false).count(:all)
@@ -18,6 +20,9 @@ class ApplicationController < ActionController::Base
       "Stock non défini"
     end
   end
+
+
+
 
 
 

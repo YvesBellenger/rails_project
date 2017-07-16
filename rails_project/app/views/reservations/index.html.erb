@@ -1,22 +1,23 @@
 <%= flash_messages %>
-
+<% title "Réservations en cours pour " + @book.title %>
 <div id="page-reservation">
   <h1>Reservations en cours de <%= @book.title %></h1>
+  <%= link_to 'Retour au livre', book_path(@book), class: 'btn btn-default' %>
   <div class="row">
     <div class="col-lg-12">
       <table class="liste-reservations table table-striped">
         <tr>
-          <th>Compte</th>
           <th>Prénom</th>
           <th>Nom</th>
           <th>Email</th>
           <th>Date de fin de réservation</th>
           <th>Date dépassée</th>
+          <th>Compte</th>
           <th>Réservation</th>
         </tr>
-        <% @reservations.where(:rendu => false).order('date_fin asc').each do |reservation| %>
+        <% @reservations.each do |reservation| %>
             <tr>
-              <th><%= link_to 'Voir', user_path(reservation.user), class: 'btn btn-default'%></th>
+
               <td><%= reservation.user.prenom%></td>
               <td><%= reservation.user.nom%></td>
               <td><%= reservation.user.email %></td>
@@ -26,11 +27,17 @@
               <% else %>
                   <th> Non </th>
               <%end%>
-              <th><%= link_to 'Détail',book_reservation_path(reservation.book,reservation), class: 'btn btn-default'%></th>
+              <td><%= link_to 'Voir', user_path(reservation.user), class: 'btn btn-default'%></td>
+              <td><%= link_to 'Détail',book_reservation_path(reservation.book,reservation), class: 'btn btn-default'%></td>
 
         <% end %>
       </table>
     </div>
   </div>
+  <% if @reservations.any? %>
+    <div class="row">
+      <%= will_paginate @reservations, renderer: BootstrapPagination::Rails, :previous_label => 'Page précédente', :next_label => 'Page suivante' %>
+    </div>
+  <% end %>
 </div>
 

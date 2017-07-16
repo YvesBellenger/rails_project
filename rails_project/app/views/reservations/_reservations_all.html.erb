@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12">
+    <table class="liste-reservations table table-striped">
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Livre réservé</th>
+        <% if !@reservations.first.rendu %>
+          <th>Date de fin de réservation</th>
+          <th>Date dépassée</th>
+        <% else %>
+          <th>Date de rendu</th>
+        <% end %>
+        <th>Compte</th>
+        <th>Livre</th>
+        <th>Réservation</th>
+      </tr>
+      <% if @reservations.any? %>
+          <% @reservations.each do |reservation| %>
+              <tr>
+                <td><%= reservation.user.prenom%></td>
+                <td><%= reservation.user.nom%></td>
+                <td><%= reservation.user.email %></td>
+                <td> <%= reservation.book.title %></td>
+                <% if !reservation.rendu %>
+                  <td><%= l reservation.date_fin.to_date, :format => :long%></td>
+                  <% if Date.current >= reservation.date_fin.to_date %>
+                      <th> <div class="alert alert-danger">Oui</div></th>
+                  <% else %>
+                      <th> Non </th>
+                  <%end%>
+                <% else %>
+                    <td><%= l reservation.updated_at.to_date, :format => :long%></td>
+                <%end%>
+                <td><%= link_to 'Voir', user_path(reservation.user), class: 'btn btn-default' %></td>
+                <td><%= link_to 'Voir',book_path(reservation.book), class: 'btn btn-default'%></td>
+                <td><%= link_to 'Détail',book_reservation_path(reservation.book,reservation), class: 'btn btn-default'%></td>
+
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+<% if @reservations.any? %>
+    <div class="row">
+      <%= will_paginate @reservations, renderer: BootstrapPagination::Rails, :previous_label => 'Page précédente', :next_label => 'Page suivante' %>
+    </div>
+<% end %>

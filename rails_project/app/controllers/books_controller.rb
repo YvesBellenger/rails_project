@@ -8,24 +8,33 @@ class BooksController < ApplicationController
 
   # GET /books
   # GET /books.json
-  def index
-    url    =request.fullpath
-    uri    = URI.parse(url)
+    def index
+    # Récupération de l'url puis parsing
+    url = request.fullpath
+    uri = URI.parse(url)
+
+    # Ce booléen permet de vérifier dans la vue si oui ou non un paramètre est présent et d'afficher ou non le bouton "afficher tous les livres"
     @req=false
 
+    #On vérifie si un paramètre est présent. Si oui et que c'est q, alors on cherche la correspondance dans la base de données. Sinon on renvoie tous les livres
     if(uri.query.present?)
-      params = CGI::parse(uri.query)
-      @books = Book.where("title LIKE (?) OR author LIKE (?)", "%#{params['q'][0]}%", "%#{params['q'][0]}%")
-      @req=true
+      parameters = CGI::parse(uri.query)
+      if (parameters['q'][0].present?)
+        @books = Book.where("title LIKE (?) OR author LIKE (?)", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%").paginate(:page => params[:page], :per_page => 12)
+        @req=true
+      else
+        @books = Book.order('title asc').paginate(:page => params[:page], :per_page => 12)
+      end
     else
-      @books = Book.all
+      @books = Book.order('title asc').paginate(:page => params[:page], :per_page => 12)
     end
-
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+    #Permet de renvoyer les livres du même auteur excepté le livre en actuellement regardé
+    @booksAuthor = Book.where("author LIKE (?) ", "%#{@book.author}%").where.not(id: @book).order("RANDOM()").limit(6)
   end
 
   # GET /books/new
@@ -37,28 +46,37 @@ class BooksController < ApplicationController
   def edit
   end
 
-  # GET /book/searchadd
+  # GET /searchadd
   def searchadd
-    url    =request.fullpath
-    uri    = URI.parse(url)
+    url = request.fullpath
+    uri = URI.parse(url)
 
+    #Permet sir le paramètre est présent de parser et effectuer correctement la recherche
     if(uri.query.present?)
-      params = CGI::parse(uri.query)
-      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes?q='+params['q'][0]+'&maxResults=40&printType=books'
-      @items = JSON.parse(response.body.force_encoding('UTF-8'))
+      parameters = CGI::parse(uri.query)
+      if (parameters['q'][0].present?)
+        response = RestClient.get 'https://www.googleapis.com/books/v1/volumes?q='+parameters['q'][0]+'&maxResults=40&printType=books'
+        @items = JSON.parse(response.body.force_encoding('UTF-8'))
+      end
     end
   end
 
-  # GET /searchadd/bookinfo
+  # GET /searchadd/bookinfos
   def searchaddinfos
-
-    url    =request.fullpath
+    url = request.fullpath
     uri    = URI.parse(url)
 
+    #Permet d'afficher correctement le livre sélectionné en fonction de son ID sur l'api google
     if(uri.query.present?)
-      params = CGI::parse(uri.query)
-      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+params['q'][0]
-      @item = JSON.parse(response.body.force_encoding('UTF-8'))
+      parameters = CGI::parse(uri.query)
+      if (parameters['q'][0].present?)
+        begin
+          response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+parameters['q'][0]
+          @item = JSON.parse(response.body.force_encoding('UTF-8'))
+        rescue
+          redirect_to search_path_url, notice: 'L\'ID rentrée est incorrecte '
+        end
+      end
     end
   end
 
@@ -69,8 +87,8 @@ class BooksController < ApplicationController
     uri    = URI.parse(url)
     if(uri.query.present?)
       @book = Book.new
-      params = CGI::parse(uri.query)
-      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+params['q'][0]
+      parameters = CGI::parse(uri.query)
+      response = RestClient.get 'https://www.googleapis.com/books/v1/volumes/'+parameters['q'][0]
       @item = JSON.parse(response.body.force_encoding('UTF-8'))
       @book_test = Book.where(:google_book_id => @item["id"]).first
       if(!@book_test.present?)

@@ -16,7 +16,11 @@
         </p>
         <div class="form-actions">
           <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
-          <%= link_to 'Voir le profil', @user, class:'btn btn-default' %>
+          <% if current_user != @user %>
+            <%= link_to 'Voir le profil', @user, class:'btn btn-default' %>
+          <% else %>
+              <%= link_to 'Voir mon profil', profil_path_url, class:'btn btn-default' %>
+          <% end %>
         </div>
 
       </div>

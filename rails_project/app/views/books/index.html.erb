@@ -1,18 +1,18 @@
+<% title "Catalogue" %>
 <%= flash_messages %>
 
 <div class="row banner">
   <%=image_tag("banner-3.jpg", alt: "banner")%>
-</div>
+  <div class="search-wrapper">
+    <div class="col-md-4 col-md-offset-4 vertical-align">
+      <form method="get" class="searchform group">
+        <label for="search-box">
+          <span class="fa fa-2x fa-search"></span>
+        </label>
 
-<div class="row search-wrapper">
-  <div class="col-md-4 col-md-offset-4 vertical-align">
-    <form method="get" class="searchform group">
-      <label for="search-box">
-        <span class="fa fa-2x fa-search"></span>
-      </label>
-
-      <input type="search" id="search-box" name="q" placeholder="Rechercher">
-    </form>
+        <input type="search" id="search-box" name="q" placeholder="Rechercher par titre ou auteur...">
+      </form>
+    </div>
   </div>
 </div>
 
@@ -26,14 +26,21 @@
       <%=link_to "Voir tous les livres", books_path, class: 'btn btn-default' %>
   <% end %>
   <div class="row" id="liste-books">
-    <% @books.order('date desc').each do |book| %>
+
+    <% @books.each do |book| %>
         <div class="book-catalogue col-lg-2 ">
-          <%= link_to raw("<img src='#{book.avatar.url()}' class='img-une'>"), book %>
+          <%= book_image(book) %>
           <h5 class="book-title"><%= book.title %></h5>
         </div>
     <% end %>
 
+
   </div>
+  <% if @books.any? %>
+    <div class="row">
+      <%= will_paginate @books, renderer: BootstrapPagination::Rails, :previous_label => 'Page précédente', :next_label => 'Page suivante' %>
+    </div>
+  <% end %>
 
 </div>
 

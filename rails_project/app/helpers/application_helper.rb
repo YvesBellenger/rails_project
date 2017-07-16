@@ -14,4 +14,9 @@ module ApplicationHelper
     nil
   end
 
+  #Permet de définir la balise title d'une page de manière dynamique
+  def title(text)
+    content_for :title, text
+  end
+
 end

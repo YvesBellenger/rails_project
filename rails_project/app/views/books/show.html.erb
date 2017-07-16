@@ -1,17 +1,18 @@
+<% title @book.title %>
 <%= flash_messages %>
 
 <div class="row page-book">
 
   <% if @book.avatar.exists? %>
-    <div class="col-md-2 col-md-offset-3 book-catalogue">
-      <%= image_tag @book.avatar.url(:medium) %>
-    </div>
+      <div class="col-md-2 col-md-offset-3 book-catalogue">
+        <%= image_tag @book.avatar.url(:original) %>
+      </div>
   <% end %>
 
   <div class="col-md-4">
 
 
-      <h1><%= @book.title %></h1>
+    <h1><%= @book.title %></h1>
 
 
     <p>
@@ -30,20 +31,23 @@
 
     <p>
       <strong>Nombre de livres en stock:</strong>
-      <%= stock_book(@book) %><% if can? :manage, :all and @book.stock.present? %> <%= total_et_pretes(@book) %> <% end %>
+      <%= stock_book(@book) %>
+      <% if can? :manage, :all and @book.stock.present? %> <%= total_et_pretes(@book) %>
+      <% end %>
     </p>
 
-    <% if current_user  %>
+    <% if current_user %>
         <% reservation_livre = Reservation.where(["user_id = ?", current_user.id]).where(["book_id = ?", @book.id]).last %>
         <% if !defined?(reservation_livre.id) %>
             <%= en_stock(@book) %>
         <% end %>
-        <% if defined?(reservation_livre.id)  %>
+        <% if defined?(reservation_livre.id) %>
             <% if reservation_livre.rendu %>
                 <%= en_stock(@book) %>
             <% else %>
                 <%= link_to 'Rendre le livre', book_reservation_path(@book, reservation_livre), method: :livre_rendu, class: 'btn btn-default' %>
-                <%= link_to 'Voir ma réservation en cours', book_reservation_path(@book, reservation_livre), class: 'btn btn-default'%>
+                <%= link_to 'Voir ma réservation en cours', book_reservation_path(@book, reservation_livre), class: 'btn btn-default' %>
+
             <% end %>
         <% end %>
 
@@ -51,8 +55,12 @@
     <% else %>
         <p>Vous devez être connecté si vous souhaitez réserver un livre</p> <br>
     <% end %>
-
-    <!-- if admin -->
+    <% if can? :manage, :all and Reservation.where(:book => @book, :rendu => false).any? %>
+        <%= link_to 'Voir réservations en cours pour ce livre', book_reservations_path(@book), class: 'btn btn-default' %>
+    <% end %>
+    <% if can? :manage, :all %>
+        <%= link_to 'Editer le livre', edit_book_path(@book), class: 'btn btn-default' %>
+    <% end %>
     <%= link_to 'Retour au catalogue', books_path, class: 'btn btn-default' %>
 
   </div>
@@ -61,8 +69,16 @@
 
 <hr>
 
-<div class="list-same-author">
-
-</div>
+<% if @booksAuthor.any? %>
+    <h2> Ouvrages du même auteur </h2>
+    <div class="list-same-author">
+      <% @booksAuthor.each do |book| %>
+          <div class="book-catalogue col-lg-2 ">
+            <%= book_image(book) %>
+            <h5 class="book-title"><%= book.title %></h5>
+          </div>
+      <% end %>
+    </div>
+<% end %>
 
 

@@ -34,17 +34,25 @@
 }
 
 #page-reservation{
-  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(5),
+  .liste-reservations td:nth-child(5),
   .liste-reservations th:nth-child(6),
-  .liste-reservations th:nth-child(7){
+  .liste-reservations td:nth-child(6),
+  .liste-reservations th:nth-child(7),
+  .liste-reservations td:nth-child(7){
     text-align: center;
   }
 }
 
 #page-reservation-all{
-  .liste-reservations th:nth-child(1),
+  .liste-reservations th:nth-child(6),
+  .liste-reservations td:nth-child(6),
   .liste-reservations th:nth-child(7),
-  .liste-reservations th:nth-child(8){
+  .liste-reservations td:nth-child(7),
+  .liste-reservations th:nth-child(8),
+  .liste-reservations td:nth-child(8),
+  .liste-reservations th:nth-child(9),
+  .liste-reservations td:nth-child(9){
     text-align: center;
   }
 }

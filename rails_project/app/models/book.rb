@@ -16,16 +16,21 @@ class Book < ApplicationRecord
   validates :avatar, presence: true
 
 
-
+  #Permet d'obtenir l'image de l'api google
   def remote_url=(url)
     tmp = URI.parse(url)
     self.avatar = tmp
   end
 
+  #L'enregistrement d'un livre en BDD via l'api google books
   def self.setup_book(book,item)
     book.title = item["volumeInfo"]["title"]
     book.text = item["volumeInfo"]["description"]
+    if item["volumeInfo"]["authors"].present?
     book.author = item["volumeInfo"]["authors"][0]
+    else
+      book.author = "Non défini"
+    end
     book.date = item["volumeInfo"]["publishedDate"]
     book.google_book_id = item["id"]
     book.stock=0
