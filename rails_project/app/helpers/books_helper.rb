@@ -9,7 +9,7 @@ module BooksHelper
     end
   end
 
-  # Permet d'affiché le nombre total de livre en stock ainsi que le nombre de livres actuellement réservés
+  # Permet d'afficher le nombre total de livre en stock ainsi que le nombre de livres actuellement réservés
   def total_et_pretes(book)
     if(book.stock.present?)
       emprunt = Reservation.where(:book_id => book.id, :rendu => false).count(:all)
@@ -22,7 +22,7 @@ module BooksHelper
     end
   end
 
-  # Permet de vérifier si oui ou non un livre est encore en stock
+  # Permet d’afficher le bouton de réservation si le livre est en stock, sinon signale à l’utilisateur que le livre n’est plus disponilbe
   def en_stock(book)
     if book.stock.present? && stock_book(book) > 0
       link_to "Réserver le livre", new_book_reservation_path(book), class: 'btn btn-default'

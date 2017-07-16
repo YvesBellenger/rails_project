@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if(uri.query.present?)
       parameters = CGI::parse(uri.query)
       if (parameters['q'][0].present?)
-        @users = User.where("prenom LIKE (?) OR nom LIKE (?) OR email LIKE (?)", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%").paginate(:page => params[:page], :per_page => 20)
+        @users = User.where("prenom LIKE (?) OR nom LIKE (?) OR email LIKE (?)", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%", "%#{parameters['q'][0]}%").order('nom asc').paginate(:page => params[:page], :per_page => 20)
         @req=true
       end
     end
